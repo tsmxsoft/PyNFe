@@ -358,8 +358,8 @@ class ComunicacaoSefaz(Comunicacao):
                 raise Exception('Modelo não encontrado! Defina modelo="nfe" ou "nfce"')
         # Estados que utilizam outros ambientes
         else:
-            lista_svrs = ['AC', 'AL','AP', 'DF', 'ES', 'PB', 'PI', 'RJ', 'RN', 'RO', 'RR', 'SC', 'SE', 'TO']
-            lista_svan = ['MA','PA']
+            lista_svrs = ['AC', 'AL','AP', 'DF', 'ES', 'PB', 'PA', 'PI', 'RJ', 'RN', 'RO', 'RR', 'SC', 'SE', 'TO']
+            lista_svan = ['MA']
             if self.uf.upper() in lista_svrs:
                 if self._ambiente == 1:
                     ambiente = 'HTTPS'
