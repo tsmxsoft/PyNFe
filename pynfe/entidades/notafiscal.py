@@ -50,6 +50,9 @@ class NotaFiscal(Entidade):
     # - Data de saida/entrada
     data_saida_entrada = None
 
+    # data servico competencia
+    data_competencia_servico = None
+    
     # - Forma de pagamento  (obrigatorio - seleciona de lista) - NF_FORMAS_PAGAMENTO
     # Removido na NF-e 4.00
     # forma_pagamento = int()
@@ -401,6 +404,15 @@ class NotaFiscal(Entidade):
                                        obj.icms_desonerado + obj.icms_st_valor + \
                                        obj.total_frete + obj.total_seguro + \
                                        obj.outras_despesas_acessorias + obj.ipi_valor_ipi
+
+
+        if kwargs.get('issqn_valor') and kwargs.get('issqn_valor_base_calculo'):
+            self.totais_issqn_base_calculo_iss += obj.issqn_valor_base_calculo
+            self.totais_issqn_total_iss += obj.issqn_valor
+            self.totais_issqn_pis += obj.pis_valor
+            self.totais_issqn_cofins += obj.obj.cofins_valor
+            self.totais_issqn_total += obj.issqn_valor
+
 
         return obj
 
@@ -810,6 +822,12 @@ class NotaFiscalProduto(Entidade):
 
     #   - Valor do ISSQN
     issqn_valor = Decimal()
+
+    # Indicador da exigibilidade do ISS
+    issqn_indiss = str()
+
+    # Indicador de incentivo Fiscal
+    issqn_indincentivo = str()
 
     #  - Imposto de Importacao
     #   - Valor base de calculo

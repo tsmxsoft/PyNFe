@@ -344,6 +344,18 @@ class SerializacaoXML(Serializacao):
             else:
                 raise NotImplementedError
 
+        # ISSQN
+        if produto_servico.issqn_valor:
+            issqn = etree.SubElement(imposto, 'ISSQN')
+            etree.SubElement(issqn, 'vBC').text = '{:.2f}'.format(produto_servico.issqn_valor_base_calculo or 0)
+            etree.SubElement(issqn, 'vAliq').text = '{:.2f}'.format(produto_servico.issqn_aliquota or 0)
+            etree.SubElement(issqn, 'vISSQN').text = '{:.2f}'.format(produto_servico.issqn_valor or 0)
+            etree.SubElement(issqn, 'cMunFG').text = produto_servico.issqn_municipio
+            etree.SubElement(issqn, 'cListServ').text = produto_servico.issqn_lista_servico
+            etree.SubElement(issqn, 'indISS').text = produto_servico.issqn_indiss
+            etree.SubElement(issqn, 'indIncentivo').text = produto_servico.issqn_indincentivo
+
+
         # IPI
         if produto_servico.ipi_codigo_enquadramento:
             ipi = etree.SubElement(imposto, 'IPI')
@@ -600,6 +612,20 @@ class SerializacaoXML(Serializacao):
         etree.SubElement(icms_total, 'vNF').text = '{:.2f}'.format(nota_fiscal.totais_icms_total_nota) 
         if nota_fiscal.totais_tributos_aproximado:
             etree.SubElement(icms_total, 'vTotTrib').text = '{:.2f}'.format(nota_fiscal.totais_tributos_aproximado)
+
+        # ISSQN
+        if nota_fiscal.totais_issqn_total:
+            issqn_total = etree.SubElement(total, 'ISSQNtot')
+            etree.SubElement(icms_total, 'vServ').text = '{:.2f}'.format(nota_fiscal.issqn_valor)
+            etree.SubElement(icms_total, 'vBC').text = '{:.2f}'.format(nota_fiscal.totais_issqn_base_calculo_iss)
+            etree.SubElement(icms_total, 'vISS').text = '{:.2f}'.format(nota_fiscal.totais_issqn_total_iss)
+            etree.SubElement(icms_total, 'vPIS').text = '{:.2f}'.format(nota_fiscal.totais_issqn_pis)
+            etree.SubElement(icms_total, 'vCOFINS').text = '{:.2f}'.format(nota_fiscal.totais_issqn_cofins)
+            if nota_fiscal.data_competencia_servico:
+                etree.SubElement(icms_total, 'dCompet').text = nota_fiscal.data_competencia_servico.strftime('%Y-%m-%d')
+            else:
+                etree.SubElement(icms_total, 'dCompet').text = datetime.now().strftime('%Y-%m-%d')
+
 
         # Transporte
         transp = etree.SubElement(raiz, 'transp')
