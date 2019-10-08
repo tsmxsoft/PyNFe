@@ -34,6 +34,7 @@ class Produto(Entidade):
     # Tabela https://www.confaz.fazenda.gov.br/anexo-i.pdf
     cest = str()
 
+    # Codigo Beneficiario
     cbenef = str()
 
     # - Unid. Com.
