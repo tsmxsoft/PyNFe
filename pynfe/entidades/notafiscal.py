@@ -541,6 +541,9 @@ class NotaFiscalProduto(Entidade):
     #  - NCM
     ncm = str()
 
+    # cBenef 
+    cbenef = str()
+
     #  - EX TIPI
     ex_tipi = str()
 
