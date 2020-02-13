@@ -626,15 +626,15 @@ class SerializacaoXML(Serializacao):
         # ISSQN
         if nota_fiscal.totais_issqn_total:
             issqn_total = etree.SubElement(total, 'ISSQNtot')
-            etree.SubElement(issqn_total, 'vServ').text = '{:.2f}'.format(nota_fiscal.totais_issqn_total)
+            etree.SubElement(issqn_total, 'vServ').text = '{:.2f}'.format(nota_fiscal.totais_issqn_base_calculo_iss)
             etree.SubElement(issqn_total, 'vBC').text = '{:.2f}'.format(nota_fiscal.totais_issqn_base_calculo_iss)
             etree.SubElement(issqn_total, 'vISS').text = '{:.2f}'.format(nota_fiscal.totais_issqn_total_iss)
             etree.SubElement(issqn_total, 'vPIS').text = '{:.2f}'.format(nota_fiscal.totais_issqn_pis)
             etree.SubElement(issqn_total, 'vCOFINS').text = '{:.2f}'.format(nota_fiscal.totais_issqn_cofins)
             if nota_fiscal.data_competencia_servico:
-                etree.SubElement(icms_total, 'dCompet').text = nota_fiscal.data_competencia_servico.strftime('%Y-%m-%d')
+                etree.SubElement(issqn_total, 'dCompet').text = nota_fiscal.data_competencia_servico.strftime('%Y-%m-%d')
             else:
-                etree.SubElement(icms_total, 'dCompet').text = datetime.now().strftime('%Y-%m-%d')
+                etree.SubElement(issqn_total, 'dCompet').text = datetime.now().strftime('%Y-%m-%d')
 
 
         # Transporte
