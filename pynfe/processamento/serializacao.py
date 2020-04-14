@@ -630,7 +630,8 @@ class SerializacaoXML(Serializacao):
             issqn_total = etree.SubElement(total, 'ISSQNtot')
             etree.SubElement(issqn_total, 'vServ').text = '{:.2f}'.format(nota_fiscal.totais_issqn_base_calculo_iss)
             etree.SubElement(issqn_total, 'vBC').text = '{:.2f}'.format(nota_fiscal.totais_issqn_base_calculo_iss)
-            etree.SubElement(issqn_total, 'vISS').text = '{:.2f}'.format(nota_fiscal.totais_issqn_total_iss)
+            if nota_fiscal.totais_issqn_total_iss:
+                etree.SubElement(issqn_total, 'vISS').text = '{:.2f}'.format(nota_fiscal.totais_issqn_total_iss)
             if nota_fiscal.totais_issqn_pis:
                 etree.SubElement(issqn_total, 'vPIS').text = '{:.2f}'.format(nota_fiscal.totais_issqn_pis)
             if nota_fiscal.totais_issqn_cofins:
