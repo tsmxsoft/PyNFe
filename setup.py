@@ -9,7 +9,7 @@ requirements = lambda f: [str(i.req) for i in parse(f, session=False)]
 
 setup(
     name='PyNFe',
-    version='0.4.14',
+    version='0.4.15',
     packages=find_packages(),
     package_data={
         'pynfe': ['data/**/*.txt'],
