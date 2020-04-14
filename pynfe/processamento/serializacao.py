@@ -280,7 +280,7 @@ class SerializacaoXML(Serializacao):
         if produto_servico.valor_tributos_aprox:
             etree.SubElement(imposto, 'vTotTrib').text = str(produto_servico.valor_tributos_aprox)
 
-        if not produto_servico.issqn_valor:
+        if not produto_servico.issqn_valor_base_calculo:
             ### ICMS
             icms = etree.SubElement(imposto, 'ICMS')
             icms_csosn = ('102', '103', '300', '400')
@@ -356,7 +356,7 @@ class SerializacaoXML(Serializacao):
 
 
         # ISSQN
-        if produto_servico.issqn_valor:
+        if produto_servico.issqn_valor_base_calculo:
             issqn = etree.SubElement(imposto, 'ISSQN')
             etree.SubElement(issqn, 'vBC').text = '{:.2f}'.format(produto_servico.issqn_valor_base_calculo or 0)
             etree.SubElement(issqn, 'vAliq').text = '{:.2f}'.format(produto_servico.issqn_aliquota or 0)
@@ -368,7 +368,7 @@ class SerializacaoXML(Serializacao):
 
 
         # IPI
-        if not produto_servico.issqn_valor:
+        if not produto_servico.issqn_valor_base_calculo:
             if produto_servico.ipi_codigo_enquadramento:
                 ipi = etree.SubElement(imposto, 'IPI')
                 etree.SubElement(ipi, 'cEnq').text = produto_servico.ipi_codigo_enquadramento
@@ -626,7 +626,7 @@ class SerializacaoXML(Serializacao):
             etree.SubElement(icms_total, 'vTotTrib').text = '{:.2f}'.format(nota_fiscal.totais_tributos_aproximado)
 
         # ISSQN
-        if nota_fiscal.totais_issqn_total:
+        if nota_fiscal.totais_issqn_base_calculo_iss:
             issqn_total = etree.SubElement(total, 'ISSQNtot')
             etree.SubElement(issqn_total, 'vServ').text = '{:.2f}'.format(nota_fiscal.totais_issqn_base_calculo_iss)
             etree.SubElement(issqn_total, 'vBC').text = '{:.2f}'.format(nota_fiscal.totais_issqn_base_calculo_iss)
