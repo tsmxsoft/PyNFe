@@ -1,5 +1,5 @@
 def get_version():
-    return '0.4.16'
+    return '0.4.17'
 
 __version__ = get_version()
 __author__ = 'Marinho Brandao, Junior Tada, Leonardo Tada, Thiago O Lindo'

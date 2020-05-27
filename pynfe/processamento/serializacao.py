@@ -696,6 +696,22 @@ class SerializacaoXML(Serializacao):
                             lacres = etree.SubElement(vol, 'lacres')
                             for lacre in volume.lacres:
                                 etree.SubElement(lacres, 'nLacre').text = lacre.numero_lacre
+        
+        # Faturas/Duplicatas
+        if nota_fiscal.fatura_numero and nota_fiscal.fatura_valor_original:
+            cobr = etree.SubElement(raiz,'cobr')
+            fat = etree.SubElement(cobr,'fat')
+            etree.SubElement(fat,'nFat',str(nota_fiscal.fatura_numero))
+            etree.SubElement(fat,'vOrig','{:.2f}'.format(nota_fiscal.fatura_valor_original))
+            etree.SubElement(fat,'vDesc','{:.2f}'.format(nota_fiscal.fatura_valor_desconto))
+            etree.SubElement(fat,'vLiq','{:.2f}'.format(nota_fiscal.fatura_valor_liquido))
+
+            if nota_fiscal.duplicatas:
+                for d_ in nota_fiscal.duplicatas:
+                    dup = etree.SubElement(cobr,'dup')
+                    etree.SubElement(dup,'nDup',str(d_.numero))
+                    etree.SubElement(dup,'dVenc',str(d_.data_vencimento.strftime('%Y-%m-%d'))
+                    etree.SubElement(dup,'vDup','{:.2f}'.format(d.valor))
 
         # Pagamento
         """ Obrigatório o preenchimento do Grupo Informações de Pagamento para NF-e e NFC-e.
