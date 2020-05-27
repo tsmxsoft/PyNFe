@@ -696,7 +696,7 @@ class SerializacaoXML(Serializacao):
                             lacres = etree.SubElement(vol, 'lacres')
                             for lacre in volume.lacres:
                                 etree.SubElement(lacres, 'nLacre').text = lacre.numero_lacre
-        
+
         # Faturas/Duplicatas
         if nota_fiscal.fatura_numero and nota_fiscal.fatura_valor_original:
             cobr = etree.SubElement(raiz,'cobr')
@@ -710,7 +710,7 @@ class SerializacaoXML(Serializacao):
                 for d_ in nota_fiscal.duplicatas:
                     dup = etree.SubElement(cobr,'dup')
                     etree.SubElement(dup,'nDup',str(d_.numero))
-                    etree.SubElement(dup,'dVenc',str(d_.data_vencimento.strftime('%Y-%m-%d'))
+                    etree.SubElement(dup,'dVenc',str(d_.data_vencimento.strftime('%Y-%m-%d')))
                     etree.SubElement(dup,'vDup','{:.2f}'.format(d.valor))
 
         # Pagamento
