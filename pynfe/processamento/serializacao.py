@@ -711,7 +711,7 @@ class SerializacaoXML(Serializacao):
                     dup = etree.SubElement(cobr, 'dup')
                     etree.SubElement(dup, 'nDup').text = str(d_.numero)
                     etree.SubElement(dup, 'dVenc').text = str(d_.data_vencimento.strftime('%Y-%m-%d'))
-                    etree.SubElement(dup, 'vDup').text = '{:.2f}'.format(d.valor)
+                    etree.SubElement(dup, 'vDup').text = '{:.2f}'.format(d_.valor)
 
         # Pagamento
         """ Obrigatório o preenchimento do Grupo Informações de Pagamento para NF-e e NFC-e.
