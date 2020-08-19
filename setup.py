@@ -3,7 +3,7 @@ from setuptools import setup, find_packages
 try:  # for pip >= 10
     from pip._internal.req import parse_requirements as parse
     requirements = lambda f: [str(i.requirement) for i in parse(f, session=False)]
-except ImportError:  # for pip <= 9.0.3
+except:  # for pip <= 9.0.3
     from pip.req import parse_requirements as parse
     requirements = lambda f: [str(i.req) for i in parse(f, session=False)]
 
