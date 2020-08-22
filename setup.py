@@ -6,7 +6,7 @@ try:  # for pip >= 10
 except ImportError:  # for pip <= 9.0.3
     from pip.req import parse_requirements as parse
     
-def requirements(f, session):
+def requirements(f):
     try:
         return [str(i.req) for i in parse(f, session=False)]
     except:
