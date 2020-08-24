@@ -2,15 +2,11 @@
 from setuptools import setup, find_packages
 try:  # for pip >= 10
     from pip._internal.req import parse_requirements as parse
+    requirements = lambda f: [str(i.req) for i in parse(f, session=False)]
 
 except:  # for pip <= 9.0.3
     from pip.req import parse_requirements as parse
-    
-def requirements(f):
-    try:
-        return [str(i.req) for i in parse(f, session=False)]
-    except:
-        return [str(i.requirement) for i in parse(f, session=False)]
+    requirements = lambda f: [str(i.requirement) for i in parse(f, session=False)]
 
 setup(
     name='PyNFe',
