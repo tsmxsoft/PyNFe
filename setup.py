@@ -16,7 +16,7 @@ setup(
     version='0.4.20',
     packages=find_packages(),
     package_data={
-        'pynfe': ['data/**/*.txt'],
+        'pynfe': ['data/**/*.txt','data/**/*.xsd'],
     },
     install_requires=requirements('requirements.txt'),
     zip_safe=False,
