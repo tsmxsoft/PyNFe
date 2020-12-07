@@ -258,6 +258,9 @@ class SerializacaoXML(Serializacao):
         if produto_servico.desconto:
             etree.SubElement(prod, 'vDesc').text = '{:.2f}'.format(produto_servico.desconto)
 
+        if produto_servico.outras_despesas_acessorias:
+            etree.SubElement(prod, 'vOutro').text = '{:.2f}'.format(produto_servico.outras_despesas_acessorias)
+
         """ Indica se valor do Item (vProd) entra no valor total da NF-e (vProd)
             0=Valor do item (vProd) não compõe o valor total da NF-e
             1=Valor do item (vProd) compõe o valor total da NF-e (vProd) (v2.0)
