@@ -712,7 +712,10 @@ class NotaFiscalProduto(Entidade):
     #   - Valor do IPI
     ipi_valor_ipi = Decimal()
 
-    #   - Valor do IPI Devolvido
+    # - Percentual Devolucao Produto
+    pdevol = Decimal()
+
+    # - Valor do IPI Devolvido
     ipi_valor_ipi_dev = Decimal()
 
     #  - PIS

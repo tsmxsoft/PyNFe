@@ -456,6 +456,17 @@ class SerializacaoXML(Serializacao):
                 # etree.SubElement(cofins_item, 'vAliqProd').text = produto_servico.cofins_aliquota_percentual
                 # etree.SubElement(cofins_item, 'vCOFINS').text = produto_servico.cofins_valor
 
+        # tag impostoDevol
+        if produto_servico.ipi_valor_ipi_dev:
+            impostodevol = etree.SubElement(raiz, 'impostoDevol')
+            etree.SubElement(impostodevol, 'pDevol').text = '{:.2f}'.format(produto_servico.pdevol or 100)
+            ipidev = etree.SubElement(impostodevol, 'IPI')
+            etree.SubElement(ipidev, 'vIPIDevol').text = '{:.2f}'.format(produto_servico.ipi_valor_ipi_dev or 0)
+
+        # informacoes adicionais do produto 
+        if produto_servico.informacoes_adicionais:
+            etree.SubElement(raiz, 'infAdProd').text = produto_servico.informacoes_adicionais
+
         if retorna_string:
             return etree.tostring(raiz, encoding="unicode", pretty_print=True)
         else:
