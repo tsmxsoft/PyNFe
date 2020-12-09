@@ -402,7 +402,7 @@ class SerializacaoXML(Serializacao):
                 etree.SubElement(pis_item, 'CST').text = produto_servico.pis_modalidade
                 etree.SubElement(pis_item, 'qBCProd').text = '{:.4f}'.format(produto_servico.quantidade_comercial)
                 etree.SubElement(pis_item, 'vAliqProd').text = str(produto_servico.pis_aliquota_percentual)
-                etree.SubElement(pis_item, 'vPIS').text = '{:.2f}'.format(produto_servico.pis_valor_base_calculo or 0)
+                etree.SubElement(pis_item, 'vPIS').text = '{:.2f}'.format(produto_servico.pis_valor or 0)
             else:
                 pis_item = etree.SubElement(pis, 'PISOutr')
                 etree.SubElement(pis_item, 'CST').text = produto_servico.pis_modalidade
@@ -411,7 +411,7 @@ class SerializacaoXML(Serializacao):
                 if str(produto_servico.pis_modalidade) not in ['49','98','99']:
                     etree.SubElement(pis_item, 'qBCProd').text = '{:.4f}'.format(produto_servico.quantidade_comercial)
                     etree.SubElement(pis_item, 'vAliqProd').text = str(produto_servico.pis_aliquota_percentual)
-                etree.SubElement(pis_item, 'vPIS').text = '{:.2f}'.format(produto_servico.pis_valor_base_calculo or 0)
+                etree.SubElement(pis_item, 'vPIS').text = '{:.2f}'.format(produto_servico.pis_valor or 0)
 
                 ## PISST
                 # pis_item = etree.SubElement(pis, 'PISST')
