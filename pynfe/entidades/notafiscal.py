@@ -403,7 +403,7 @@ class NotaFiscal(Entidade):
         self.totais_icms_total_nota += obj.valor_total_bruto - obj.desconto + \
                                        obj.icms_desonerado + obj.icms_st_valor + \
                                        obj.total_frete + obj.total_seguro + \
-                                       obj.outras_despesas_acessorias + obj.ipi_valor_ipi
+                                       obj.outras_despesas_acessorias + obj.ipi_valor_ipi + obj.ipi_valor_ipi_dev
 
         # Se definido issqn_valor_base_calculo
         if kwargs.get('issqn_valor_base_calculo'):
