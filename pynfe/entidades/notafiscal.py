@@ -387,8 +387,9 @@ class NotaFiscal(Entidade):
         # self.totais_icms_total_ii += # tem que entender o cálculo
         self.totais_icms_total_ipi += obj.ipi_valor_ipi
         self.totais_icms_total_ipi_dev += obj.ipi_valor_ipi_dev
-        self.totais_icms_pis += obj.pis_valor
-        self.totais_icms_cofins += obj.cofins_valor
+        if not kwargs.get('issqn_valor_base_calculo'):
+            self.totais_icms_pis += obj.pis_valor
+            self.totais_icms_cofins += obj.cofins_valor
         self.totais_icms_outras_despesas_acessorias += obj.outras_despesas_acessorias
         # - Valor Total do FCP (Fundo de Combate à Pobreza)
         self.totais_fcp += obj.fcp_valor
