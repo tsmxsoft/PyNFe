@@ -318,12 +318,13 @@ class SerializacaoXML(Serializacao):
                 etree.SubElement(icms_item, 'orig').text = str(produto_servico.icms_origem)
                 etree.SubElement(icms_item, 'CSOSN').text = produto_servico.icms_csosn
             else:
-                ### OUTROS TIPOS DE ICMS (00,10,20)
+                ### OUTROS TIPOS DE ICMS (00,10,20,41)
                 icms_item = etree.SubElement(icms, 'ICMS'+produto_servico.icms_modalidade)
                 etree.SubElement(icms_item, 'orig').text = str(produto_servico.icms_origem)
                 etree.SubElement(icms_item, 'CST').text = produto_servico.icms_modalidade
                 # Modalidade de determinação da BC do ICMS: 0=Margem Valor Agregado (%); 1=Pauta (Valor); 2=Preço Tabelado Máx. (valor); 3=Valor da operação.
-                etree.SubElement(icms_item, 'modBC').text = str(produto_servico.icms_modalidade_determinacao_bc)
+                if produto_servico.icms_modalidade not in ['40','41','50']:
+                    etree.SubElement(icms_item, 'modBC').text = str(produto_servico.icms_modalidade_determinacao_bc)
                 # 00=Tributada integralmente.
                 if produto_servico.icms_modalidade == '00':
                     etree.SubElement(icms_item, 'vBC').text = '{:.2f}'.format(produto_servico.icms_valor_base_calculo or 0)  # Valor da BC do ICMS
@@ -355,7 +356,16 @@ class SerializacaoXML(Serializacao):
                         etree.SubElement(icms_item, 'vBCFCP').text = '{:.2f}'.format(produto_servico.fcp_base_calculo or 0)  # Base de calculo FCP
                         etree.SubElement(icms_item, 'pFCP').text = '{:.2f}'.format(produto_servico.fcp_percentual or 0)  # Percentual FCP
                         etree.SubElement(icms_item, 'vFCP').text = '{:.2f}'.format(produto_servico.fcp_valor or 0)  # Valor Fundo Combate a Pobreza
+                elif produto_servico.icms_modalidade == '51':
+                    etree.SubElement(icms_item, 'pRedBC').text = '{:.2f}'.format(produto_servico.icms_percentual_reducao_bc or 0)  # Percentual da Redução de BC
+                    etree.SubElement(icms_item, 'vBC').text = '{:.2f}'.format(produto_servico.icms_valor_base_calculo or 0)  # Valor da BC do ICMS
+                    etree.SubElement(icms_item, 'pICMS').text = '{:.2f}'.format(produto_servico.icms_aliquota or 0)          # Alíquota do imposto
+                    etree.SubElement(icms_item, 'vICMS').text = '{:.2f}'.format(produto_servico.icms_valor or 0)  # Valor do ICMS
 
+                elif produto_servico.icms_modalidade == '60':
+                    etree.SubElement(icms_item, 'vBCSTRet').text = '{:.2f}'.format(produto_servico.icms_st_valor_base_calculo or 0)
+                    etree.SubElement(icms_item, 'vICMSSTRet').text = '{:.2f}'.format(produto_servico.icms_st_valor or 0)
+                    etree.SubElement(icms_item, 'pST').text = '{:.2f}'.format(produto_servico.icms_st_aliquota or 0)
 
 
         # ISSQN
