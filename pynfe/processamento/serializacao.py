@@ -257,7 +257,7 @@ class SerializacaoXML(Serializacao):
         etree.SubElement(prod, 'qTrib').text = str(produto_servico.quantidade_tributavel)
         etree.SubElement(prod, 'vUnTrib').text = '{:.4f}'.format(produto_servico.valor_unitario_tributavel or 0)
 
-        if produto.total_frete:
+        if produto_servico.total_frete:
             etree.SubElement(prod, 'vFrete').text = '{:.2f}'.format(produto_servico.total_frete)
 
         if produto_servico.desconto:
