@@ -376,7 +376,7 @@ class NotaFiscal(Entidade):
         obj = NotaFiscalProduto(**kwargs)
         self.produtos_e_servicos.append(obj)
         self.totais_icms_base_calculo += obj.icms_valor_base_calculo
-        self.totais_icms_total += obj.icms_valor
+        self.totais_icms_total += Decimal('{:.2f}'.format(obj.icms_valor))
         self.totais_icms_desonerado += obj.icms_desonerado
 
         self.totais_icms_st_base_calculo += obj.icms_st_valor_base_calculo if obj.icms_modalidade not in ['60', '41', '300', '500'] else 0
@@ -390,7 +390,7 @@ class NotaFiscal(Entidade):
         self.totais_icms_total_ipi_dev += obj.ipi_valor_ipi_dev
         if not kwargs.get('issqn_valor_base_calculo'):
             self.totais_icms_pis += obj.pis_valor
-            self.totais_icms_cofins += obj.cofins_valor
+            self.totais_icms_cofins += Decimal('{:.2f}'.format(obj.cofins_valor)) 
         self.totais_icms_outras_despesas_acessorias += obj.outras_despesas_acessorias
         # - Valor Total do FCP (Fundo de Combate à Pobreza)
         self.totais_fcp += obj.fcp_valor
