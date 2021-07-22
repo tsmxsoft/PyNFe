@@ -100,6 +100,17 @@ class ComunicacaoSefaz(Comunicacao):
                             raiz.append(nota_fiscal)
                             raiz.append(prot_nfe)
                             return 0, raiz
+
+                        # denegado o uso da NF-e 
+                        # 110 = Uso Denegado
+                        # 301 = Uso Denegado: Irregularidade fiscal do emitente
+                        # 302 = Uso Denegado: Irregularidade fiscal do destinatário
+                        # 303 = Uso Denegado: Destinatário não habilitado a operar na UF
+                        elif status in ["110", "301", "302", "303"]:
+                            raiz = etree.Element('nfeProc', xmlns=NAMESPACE_NFE, versao=VERSAO_PADRAO)
+                            raiz.append(nota_fiscal)
+                            raiz.append(prot_nfe)
+                            return 2, raiz
                 except IndexError:
                     # Protocolo com algum erro no Envio
                     return 1, retorno, nota_fiscal
