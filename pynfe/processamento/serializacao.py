@@ -326,7 +326,7 @@ class SerializacaoXML(Serializacao):
                 if nota_fiscal and nota_fiscal.cliente_final and not produto_servico.icms_st_retido:
                     etree.SubElement(icms_item, 'vBCSTRet').text = '{:.2f}'.format(0)
                     etree.SubElement(icms_item, 'pST').text = '{:.4f}'.format(0)
-                    etree.SubElement(icms_item, 'vICMSSubstituto').text = '{:.2f}'.format(produto_servico.isms_st_substituto or 0)
+                    etree.SubElement(icms_item, 'vICMSSubstituto').text = '{:.2f}'.format(produto_servico.icms_st_substituto or 0)
                     etree.SubElement(icms_item, 'vICMSSTRet').text = '{:.2f}'.format(0)
 
                     etree.SubElement(icms_item, 'pRedBCEfet').text = '{:.4f}'.format(produto_servico.icms_st_percentual_reducao_bc or 0)
@@ -337,7 +337,7 @@ class SerializacaoXML(Serializacao):
                 else:
                     etree.SubElement(icms_item, 'vBCSTRet').text = '{:.2f}'.format(produto_servico.icms_st_valor_base_calculo or 0)
                     etree.SubElement(icms_item, 'pST').text = '{:.4f}'.format(produto_servico.icms_st_aliquota or 0)
-                    etree.SubElement(icms_item, 'vICMSSubstituto').text = '{:.2f}'.format(produto_servico.isms_st_substituto)
+                    etree.SubElement(icms_item, 'vICMSSubstituto').text = '{:.2f}'.format(produto_servico.icms_st_substituto)
                     etree.SubElement(icms_item, 'vICMSSTRet').text = '{:.2f}'.format(produto_servico.icms_st_valor)
 
 
@@ -394,7 +394,7 @@ class SerializacaoXML(Serializacao):
                     if nota_fiscal and nota_fiscal.cliente_final and not produto_servico.icms_st_retido:
                         etree.SubElement(icms_item, 'vBCSTRet').text = '{:.2f}'.format(0)
                         etree.SubElement(icms_item, 'pST').text = '{:.4f}'.format(0)
-                        etree.SubElement(icms_item, 'vICMSSubstituto').text = '{:.2f}'.format(produto_servico.isms_st_substituto or 0)
+                        etree.SubElement(icms_item, 'vICMSSubstituto').text = '{:.2f}'.format(produto_servico.icms_st_substituto or 0)
                         etree.SubElement(icms_item, 'vICMSSTRet').text = '{:.2f}'.format(0)
 
                         etree.SubElement(icms_item, 'pRedBCEfet').text = '{:.4f}'.format(produto_servico.icms_st_percentual_reducao_bc or 0)
@@ -405,7 +405,7 @@ class SerializacaoXML(Serializacao):
                     else:
                         etree.SubElement(icms_item, 'vBCSTRet').text = '{:.2f}'.format(produto_servico.icms_st_valor_base_calculo or 0)
                         etree.SubElement(icms_item, 'pST').text = '{:.4f}'.format(produto_servico.icms_st_aliquota or 0)
-                        etree.SubElement(icms_item, 'vICMSSubstituto').text = '{:.2f}'.format(produto_servico.isms_st_substituto or 0)
+                        etree.SubElement(icms_item, 'vICMSSubstituto').text = '{:.2f}'.format(produto_servico.icms_st_substituto or 0)
                         etree.SubElement(icms_item, 'vICMSSTRet').text = '{:.2f}'.format(0)
 
                         #etree.SubElement(icms_item, 'pRedBCEfet').text = '{:.4f}'.format(0)
