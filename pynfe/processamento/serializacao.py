@@ -283,6 +283,10 @@ class SerializacaoXML(Serializacao):
         # Imposto
         imposto = etree.SubElement(raiz, 'imposto')
 
+        # nFCI
+        if produto_servico.nfci:
+            etree.SubElement(prod, 'nFCI').text = produto_servico.nfci
+
         # Lei da transparencia
         # Tributos aprox por item
         if produto_servico.valor_tributos_aprox:

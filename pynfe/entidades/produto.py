@@ -111,6 +111,9 @@ class Produto(Entidade):
     fcp_percentual = Decimal()
     fcp_valor = Decimal()
 
+    # # Número de controle da FCI (nFCI) - Ficha de Conteúdo de Importação.
+    nfci = str()
+
     # # - ICMS (lista 1 para * / ManyToManyField)
     icms = None
     def adicionar_icms(self, **kwargs):
