@@ -558,6 +558,9 @@ class NotaFiscalProduto(Entidade):
     #  - Genero
     genero = str()
 
+    # Número de controle da FCI (nFCI) - Ficha de Conteúdo de Importação.
+    nfci = str()
+
     #  - Unidade Comercial (obrigatorio)
     unidade_comercial = str()
 
