@@ -76,6 +76,8 @@ class NotaFiscal(Entidade):
     """
     tipo_pagamento = int()
 
+    descricao_pagamento = str()
+
     # - Forma de emissao (obrigatorio - seleciona de lista) - NF_FORMAS_EMISSAO
     forma_emissao = str()
 
