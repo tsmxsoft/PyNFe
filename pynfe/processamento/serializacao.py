@@ -798,7 +798,7 @@ class SerializacaoXML(Serializacao):
 
             if str(nota_fiscal.tipo_pagamento) == '99': # Outros
                 descricao_pagamento = nota_fiscal.descricao_pagamento or 'Sem Informacao'
-                etree.SubElement(detpag, 'xPag').text = descricao_pagamento[:60]
+                etree.SubElement(detpag, 'xPag').text = str(descricao_pagamento)[:60]
 
             etree.SubElement(detpag, 'vPag').text = '{:.2f}'.format(0)
         else:
@@ -806,7 +806,7 @@ class SerializacaoXML(Serializacao):
             
             if str(nota_fiscal.tipo_pagamento) == '99': # Outros
                 descricao_pagamento = nota_fiscal.descricao_pagamento or 'Sem Informacao'
-                etree.SubElement(detpag, 'xPag').text = descricao_pagamento[:60]
+                etree.SubElement(detpag, 'xPag').text = str(descricao_pagamento)[:60]
             
             if str(nota_fiscal.tipo_pagamento).zfill(2) == '90':
                 etree.SubElement(detpag, 'vPag').text = '{:.2f}'.format(0)
