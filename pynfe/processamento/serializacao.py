@@ -817,7 +817,7 @@ class SerializacaoXML(Serializacao):
             # etree.SubElement(pag, 'vTroco').text = str('')
 
         if str(nota_fiscal.tipo_pagamento) == '99': # Outros
-            descricao_pagamento = nota_fiscal.descricao_pagamento or 'Sem Informação'
+            descricao_pagamento = nota_fiscal.descricao_pagamento or 'Sem Informacao'
             etree.SubElement(detpag, 'xPag').text = descricao_pagamento[:60]
 
         # Informações adicionais
