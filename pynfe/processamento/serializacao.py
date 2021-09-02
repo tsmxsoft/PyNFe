@@ -795,9 +795,19 @@ class SerializacaoXML(Serializacao):
         detpag = etree.SubElement(pag, 'detPag')
         if nota_fiscal.finalidade_emissao == '3' or nota_fiscal.finalidade_emissao == '4':
             etree.SubElement(detpag, 'tPag').text = '90'
+
+            if str(nota_fiscal.tipo_pagamento) == '99': # Outros
+                descricao_pagamento = nota_fiscal.descricao_pagamento or 'Sem Informacao'
+                etree.SubElement(detpag, 'xPag').text = descricao_pagamento[:60]
+
             etree.SubElement(detpag, 'vPag').text = '{:.2f}'.format(0)
         else:
             etree.SubElement(detpag, 'tPag').text = str(nota_fiscal.tipo_pagamento).zfill(2)
+            
+            if str(nota_fiscal.tipo_pagamento) == '99': # Outros
+                descricao_pagamento = nota_fiscal.descricao_pagamento or 'Sem Informacao'
+                etree.SubElement(detpag, 'xPag').text = descricao_pagamento[:60]
+            
             if str(nota_fiscal.tipo_pagamento).zfill(2) == '90':
                 etree.SubElement(detpag, 'vPag').text = '{:.2f}'.format(0)
             else:
@@ -815,10 +825,6 @@ class SerializacaoXML(Serializacao):
                 #etree.SubElement(cartao, 'cAut').text = '' # Identifica o número da autorização da transação da operação com cartão de crédito e/ou débito
             # troco
             # etree.SubElement(pag, 'vTroco').text = str('')
-
-        if str(nota_fiscal.tipo_pagamento) == '99': # Outros
-            descricao_pagamento = nota_fiscal.descricao_pagamento or 'Sem Informacao'
-            etree.SubElement(detpag, 'xPag').text = descricao_pagamento[:60]
 
         # Informações adicionais
         if nota_fiscal.informacoes_adicionais_interesse_fisco or nota_fiscal.informacoes_complementares_interesse_contribuinte:
