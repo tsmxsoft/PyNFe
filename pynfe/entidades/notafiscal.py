@@ -78,6 +78,14 @@ class NotaFiscal(Entidade):
 
     descricao_pagamento = str()
 
+    cartao_tipo_integracao = int()
+
+    cartao_cnpj = str()
+
+    cartao_tipo_bandeira = int()
+
+    cartao_numero_autorizacao = str()
+
     # - Forma de emissao (obrigatorio - seleciona de lista) - NF_FORMAS_EMISSAO
     forma_emissao = str()
 
