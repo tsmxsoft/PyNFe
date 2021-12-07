@@ -13,7 +13,7 @@ def requirements(f):
 
 setup(
     name='PyNFe',
-    version='0.4.44',
+    version='0.4.45',
     packages=find_packages(),
     package_data={
         'pynfe': ['data/**/*.txt','data/**/*.xsd'],

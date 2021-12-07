@@ -719,7 +719,15 @@ class SerializacaoXML(Serializacao):
                 etree.SubElement(issqn_total, 'dCompet').text = nota_fiscal.data_competencia_servico.strftime('%Y-%m-%d')
             else:
                 etree.SubElement(issqn_total, 'dCompet').text = datetime.now().strftime('%Y-%m-%d')
-
+            
+            try:
+                if nota_fiscal.issqn_vissret:
+                    etree.SubElement(issqn_total, 'vISSRet').text = '{:.2f}'.format(nota_fiscal.issqn_vissret)
+                
+                if nota_fiscal.issqn_cregtrib:
+                    etree.SubElement(issqn_total, 'cRegTrib').text = nota_fiscal.issqn_cregtrib
+            except Exception as e:
+                print (str(e))
 
         # Transporte
         transp = etree.SubElement(raiz, 'transp')

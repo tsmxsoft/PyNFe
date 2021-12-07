@@ -217,6 +217,12 @@ class NotaFiscal(Entidade):
     #  - Base de calculo do ISS
     totais_issqn_base_calculo_iss = Decimal()
 
+    # Valor total retenção ISS
+    issqn_vissret = Decimal()
+
+    # Código do Regime Especial de Tributação
+    issqn_cregtrib = str()
+
     #  - Total do ISS
     totais_issqn_total_iss = Decimal()
 
