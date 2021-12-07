@@ -725,7 +725,7 @@ class SerializacaoXML(Serializacao):
                     etree.SubElement(issqn_total, 'vISSRet').text = '{:.2f}'.format(nota_fiscal.issqn_vissret)
                 
                 if nota_fiscal.issqn_cregtrib:
-                    etree.SubElement(issqn_total, 'cRegTrib').text = nota_fiscal.issqn_cregtrib
+                    etree.SubElement(issqn_total, 'cRegTrib').text = int(nota_fiscal.issqn_cregtrib)
             except Exception as e:
                 print (str(e))
 
