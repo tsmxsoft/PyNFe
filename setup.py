@@ -11,9 +11,10 @@ def requirements(f):
     except:
         return [str(i.requirement) for i in parse(f, session=False)]
 
+
 setup(
     name='PyNFe',
-    version='0.4.46',
+    version='0.4.47',
     packages=find_packages(),
     package_data={
         'pynfe': ['data/**/*.txt','data/**/*.xsd'],

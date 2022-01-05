@@ -213,6 +213,9 @@ class ComunicacaoSefaz(Comunicacao):
         # UF que utilizam a SVRS - Sefaz Virtual do RS: Para serviço de Consulta Cadastro: AC, RN, PB, SC 
         lista_svrs = ['AC', 'RJ', 'RN', 'PB', 'SC', 'PI', 'TO']
 
+        if datetime.datetime.now() >= datetime.datetime(2022, 1, 10, 9, 0, 0):
+            lista_svrs.append('CE')
+
         # RS implementa um método diferente na consulta de cadastro
         if self.uf.upper() == 'RS':
             url = NFE['RS']['CADASTRO']
@@ -350,6 +353,10 @@ class ComunicacaoSefaz(Comunicacao):
         """ Retorna a url para comunicação com o webservice """
         # estado que implementam webservices proprios
         lista = ['PR', 'MS', 'SP', 'AM', 'CE', 'BA', 'GO', 'MG', 'MT', 'PE', 'RS']
+
+        if datetime.datetime.now() >= datetime.datetime(2022, 1, 10, 9, 0, 0):
+            lista.remove('CE')
+
         if self.uf.upper() in lista:
             if self._ambiente == 1:
                 ambiente = 'HTTPS'
@@ -371,6 +378,10 @@ class ComunicacaoSefaz(Comunicacao):
         else:
             lista_svrs = ['AC', 'AL','AP', 'DF', 'ES', 'PB', 'PA', 'PI', 'RJ', 'RN', 'RO', 'RR', 'SC', 'SE', 'TO']
             lista_svan = ['MA']
+
+            if datetime.datetime.now() >= datetime.datetime(2022, 1, 10, 9, 0, 0):
+                lista_svrs.append('CE')
+
             if self.uf.upper() in lista_svrs:
                 if self._ambiente == 1:
                     ambiente = 'HTTPS'
@@ -566,7 +577,7 @@ class ComunicacaoNfse(Comunicacao):
         # cabecalho = '<ns2:cabecalho versao="3" xmlns:ns2="http://www.ginfes.com.br/cabecalho_v03.xsd"
         # xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><versaoDados>3</versaoDados></ns2:cabecalho>'
         # cabecalho
-        raiz = etree.Element('{%s}cabecalho'%self._namespace, nsmap={'ns2':self._namespace, 'xsi':NAMESPACE_XSI}, versao=self._versao)
+        raiz = etree.Element('{%s}cabecalho' % self._namespace, nsmap={'ns2':self._namespace, 'xsi':NAMESPACE_XSI}, versao=self._versao)
         etree.SubElement(raiz, 'versaoDados').text = self._versao
 
         if retorna_string:
