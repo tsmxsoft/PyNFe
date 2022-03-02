@@ -76,6 +76,8 @@ class NotaFiscal(Entidade):
     """
     tipo_pagamento = int()
 
+    indicacao_pagamento = str()
+
     descricao_pagamento = str()
 
     cartao_tipo_integracao = int()
@@ -497,7 +499,7 @@ class NotaFiscal(Entidade):
     def identificador_unico(self):
         # Monta 'Id' da tag raiz <infNFe>
         # Ex.: NFe35080599999090910270550010000000011518005123
-        key = "%(uf)s%(ano)s%(mes)s%(cnpj)s%(mod)s%(serie)s%(nNF)s%(tpEmis)s%(cNF)s"%{
+        key = "%(uf)s%(ano)s%(mes)s%(cnpj)s%(mod)s%(serie)s%(nNF)s%(tpEmis)s%(cNF)s" % {
                 'uf': CODIGOS_ESTADOS[self.uf],
                 'ano': self.data_emissao.strftime('%y'),
                 'mes': self.data_emissao.strftime('%m'),
@@ -508,7 +510,7 @@ class NotaFiscal(Entidade):
                 'tpEmis': str(self.forma_emissao),
                 'cNF': self._codigo_numerico_aleatorio(),
                 }
-        return "NFe%(uf)s%(ano)s%(mes)s%(cnpj)s%(mod)s%(serie)s%(nNF)s%(tpEmis)s%(cNF)s%(cDV)s"%{
+        return "NFe%(uf)s%(ano)s%(mes)s%(cnpj)s%(mod)s%(serie)s%(nNF)s%(tpEmis)s%(cNF)s%(cDV)s" % {
                 'uf': CODIGOS_ESTADOS[self.uf],
                 'ano': self.data_emissao.strftime('%y'),
                 'mes': self.data_emissao.strftime('%m'),

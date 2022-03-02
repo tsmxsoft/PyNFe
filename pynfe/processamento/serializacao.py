@@ -612,7 +612,7 @@ class SerializacaoXML(Serializacao):
             etree.SubElement(ide, 'indFinal').text = str(nota_fiscal.cliente_final)
             etree.SubElement(ide, 'indPres').text = str(nota_fiscal.indicador_presencial)
         etree.SubElement(ide, 'procEmi').text = str(nota_fiscal.processo_emissao)
-        etree.SubElement(ide, 'verProc').text = '%s %s'%(self._nome_aplicacao, nota_fiscal.versao_processo_emissao)
+        etree.SubElement(ide, 'verProc').text = '%s %s' % (self._nome_aplicacao, nota_fiscal.versao_processo_emissao)
 
         ### NF-e referenciada (utilizado em casos de devolução/garantia) ###
         # Apenas NF-e
@@ -801,6 +801,10 @@ class SerializacaoXML(Serializacao):
         Para as notas com finalidade de Ajuste ou Devolução o campo Forma de Pagamento deve ser preenchido com 90=Sem Pagamento. """
         pag = etree.SubElement(raiz, 'pag')
         detpag = etree.SubElement(pag, 'detPag')
+
+        if nota_fiscal.indicacao_pagamento:
+            etree.SubElement(detpag, 'indPag').text = str(nota_fiscal.indicacao_pagamento)
+
         if nota_fiscal.finalidade_emissao == '3' or nota_fiscal.finalidade_emissao == '4':
             etree.SubElement(detpag, 'tPag').text = '90'
 
