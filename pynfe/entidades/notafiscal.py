@@ -88,6 +88,8 @@ class NotaFiscal(Entidade):
 
     cartao_numero_autorizacao = str()
 
+    cartao_valor_troco = Decimal()
+
     # - Forma de emissao (obrigatorio - seleciona de lista) - NF_FORMAS_EMISSAO
     forma_emissao = str()
 
