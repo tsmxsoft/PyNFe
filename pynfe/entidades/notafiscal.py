@@ -84,7 +84,7 @@ class NotaFiscal(Entidade):
 
     cartao_cnpj = str()
 
-    cartao_tipo_bandeira = int()
+    cartao_tipo_bandeira = str()
 
     cartao_numero_autorizacao = str()
 
