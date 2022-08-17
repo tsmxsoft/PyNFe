@@ -11,6 +11,7 @@ from datetime import datetime
 import re
 import six
 import traceback
+from decimal import Decimal
 
 
 class Serializacao(object):
@@ -838,7 +839,9 @@ class SerializacaoXML(Serializacao):
                     etree.SubElement(cartao, 'CNPJ').text = str(re.sub('[^0-9]', '', nota_fiscal.cartao_cnpj or '')) # Informar o CNPJ da Credenciadora de cartão de crédito / débito
                     etree.SubElement(cartao, 'tBand').text = str(nota_fiscal.cartao_tipo_bandeira or '') # 01=Visa 02=Mastercard 03=American Express 04=Sorocred 05=Diners Club 06=Elo 07=Hipercard 08=Aura 09=Caba 99=Outros
                     etree.SubElement(cartao, 'cAut').text = str(nota_fiscal.cartao_numero_autorizacao[:20] if nota_fiscal.cartao_numero_autorizacao else '') # Identifica o número da autorização da transação da operação com cartão de crédito e/ou débito
-                    etree.SubElement(cartao, 'vTroco').text = '{:.2f}'.format(nota_fiscal.cartao_valor_troco or 0)
+                    
+                    if nota_fiscal.cartao_valor_troco and nota_fiscal.cartao_valor_troco > Decimal('0.00'):
+                        etree.SubElement(cartao, 'vTroco').text = '{:.2f}'.format(nota_fiscal.cartao_valor_troco or 0)
             except Exception as e:
                 traceback.print_exc()
                 
