@@ -386,7 +386,7 @@ class SerializacaoXML(Serializacao):
                         etree.SubElement(icms_item, 'vBCFCP').text = '{:.2f}'.format(produto_servico.fcp_base_calculo or 0)  # Base de calculo FCP
                         etree.SubElement(icms_item, 'pFCP').text = '{:.2f}'.format(produto_servico.fcp_percentual or 0)  # Percentual FCP
                         etree.SubElement(icms_item, 'vFCP').text = '{:.2f}'.format(produto_servico.fcp_valor or 0)  # Valor Fundo Combate a Pobreza
-                elif produto_servico.icms_modalidade == '51':
+                elif produto_servico.icms_modalidade in ['51', '90']:
                     etree.SubElement(icms_item, 'pRedBC').text = '{:.4f}'.format(produto_servico.icms_percentual_reducao_bc or 0)  # Percentual da Redução de BC
                     etree.SubElement(icms_item, 'vBC').text = '{:.2f}'.format(produto_servico.icms_valor_base_calculo or 0)  # Valor da BC do ICMS
                     etree.SubElement(icms_item, 'pICMS').text = '{:.2f}'.format(produto_servico.icms_aliquota or 0)          # Alíquota do imposto
