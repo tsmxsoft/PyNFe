@@ -10,7 +10,7 @@
 2401008	Apodi
 2401107	Areia Branca
 2401206	Arês
-2401305	Augusto Severo
+2401305	Campo Grande
 2401404	Baía Formosa
 2401453	Baraúna
 2401503	Barcelona
