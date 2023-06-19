@@ -353,8 +353,7 @@ class SerializacaoXML(Serializacao):
                 etree.SubElement(icms_item, 'orig').text = str(produto_servico.icms_origem)
                 etree.SubElement(icms_item, 'CST').text = produto_servico.icms_modalidade
                 # Modalidade de determinação da BC do ICMS: 0=Margem Valor Agregado (%); 1=Pauta (Valor); 2=Preço Tabelado Máx. (valor); 3=Valor da operação.
-
-                if produto_servico.icms_modalidade in ["40"]:
+                if produto_servico.icms_modalidade in ['40']:
                     etree.SubElement(icms_item, 'CST').text = "41" # nao tributada
                 if produto_servico.icms_modalidade not in ['40','50']:
                     etree.SubElement(icms_item, 'modBC').text = str(produto_servico.icms_modalidade_determinacao_bc)
