@@ -349,12 +349,15 @@ class SerializacaoXML(Serializacao):
 
             else:
                 ### OUTROS TIPOS DE ICMS (00,10,20,41)
+                icms_cst = produto_servico.icms_modalidade
+                if str(produto_servico.icms_modalidade) in ['40']:
+                    icms_cst = '41' # nao tributada
+
                 icms_item = etree.SubElement(icms, 'ICMS'+produto_servico.icms_modalidade)
                 etree.SubElement(icms_item, 'orig').text = str(produto_servico.icms_origem)
-                etree.SubElement(icms_item, 'CST').text = produto_servico.icms_modalidade
+                etree.SubElement(icms_item, 'CST').text = icms_cst
+
                 # Modalidade de determinação da BC do ICMS: 0=Margem Valor Agregado (%); 1=Pauta (Valor); 2=Preço Tabelado Máx. (valor); 3=Valor da operação.
-                if produto_servico.icms_modalidade in ['40']:
-                    etree.SubElement(icms_item, 'CST').text = "41" # nao tributada
                 if produto_servico.icms_modalidade not in ['40','50']:
                     etree.SubElement(icms_item, 'modBC').text = str(produto_servico.icms_modalidade_determinacao_bc)
                 # 00=Tributada integralmente.
