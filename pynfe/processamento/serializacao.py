@@ -449,11 +449,11 @@ class SerializacaoXML(Serializacao):
 
 
         # IPI
-        if not produto_servico.issqn_valor_base_calculo:
-            if produto_servico.ipi_codigo_enquadramento:
-                ipi = etree.SubElement(imposto, 'IPI')
-                etree.SubElement(ipi, 'cEnq').text = produto_servico.ipi_codigo_enquadramento
-                if str(produto_servico.icms_modalidade) not in ["41"]:
+        if str(produto_servico.icms_modalidade) not in ["41"]:
+            if not produto_servico.issqn_valor_base_calculo:
+                if produto_servico.ipi_codigo_enquadramento:
+                    ipi = etree.SubElement(imposto, 'IPI')
+                    etree.SubElement(ipi, 'cEnq').text = produto_servico.ipi_codigo_enquadramento
                     if produto_servico.ipi_situacao_tributaria:
                         ipitrib = etree.SubElement(ipi, 'IPITrib')
                         etree.SubElement(ipitrib, 'CST').text = produto_servico.ipi_situacao_tributaria
