@@ -348,8 +348,8 @@ class SerializacaoXML(Serializacao):
 
 
             else: 
-                if produto_servico.icms_modalidade == "40":
-                    icms_item = etree.SubElement(icms, 'ICMS' + produto_servico.icms_modalidade)
+                if produto_servico.icms_modalidade == "41":
+                    icms_item = etree.SubElement(icms, 'ICMS40')
                     etree.SubElement(icms_item, 'orig').text = str(produto_servico.icms_origem)
                     etree.SubElement(icms_item, 'CST').text = produto_servico.icms_modalidade
                 else:
