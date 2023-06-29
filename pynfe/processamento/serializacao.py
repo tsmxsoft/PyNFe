@@ -453,7 +453,7 @@ class SerializacaoXML(Serializacao):
             if produto_servico.ipi_codigo_enquadramento:
                 ipi = etree.SubElement(imposto, 'IPI')
                 etree.SubElement(ipi, 'cEnq').text = produto_servico.ipi_codigo_enquadramento
-                if produto_servico.icms_modalidade not in ["41"]:
+                if str(produto_servico.icms_modalidade) not in ["41"]:
                     if produto_servico.ipi_situacao_tributaria:
                         ipitrib = etree.SubElement(ipi, 'IPITrib')
                         etree.SubElement(ipitrib, 'CST').text = produto_servico.ipi_situacao_tributaria
