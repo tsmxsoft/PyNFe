@@ -14,7 +14,7 @@ def requirements(f):
 
 setup(
     name='PyNFe',
-    version='0.4.70',
+    version='0.4.71',
     packages=find_packages(),
     package_data={
         'pynfe': ['data/**/*.txt','data/**/*.xsd'],
