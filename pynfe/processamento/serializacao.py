@@ -453,12 +453,13 @@ class SerializacaoXML(Serializacao):
             if produto_servico.ipi_codigo_enquadramento:
                 ipi = etree.SubElement(imposto, 'IPI')
                 etree.SubElement(ipi, 'cEnq').text = produto_servico.ipi_codigo_enquadramento
-                if produto_servico.ipi_situacao_tributaria:
-                    ipitrib = etree.SubElement(ipi, 'IPITrib')
-                    etree.SubElement(ipitrib, 'CST').text = produto_servico.ipi_situacao_tributaria
-                    etree.SubElement(ipitrib, 'vBC').text = '{:.2f}'.format(produto_servico.ipi_valor_base_calculo or 0)
-                    etree.SubElement(ipitrib, 'pIPI').text = '{:.2f}'.format(produto_servico.ipi_aliquota or 0)
-                    etree.SubElement(ipitrib, 'vIPI').text = '{:.2f}'.format(produto_servico.ipi_valor_ipi or 0)
+                if produto_servico.icms_modalidade not in ["41"]:
+                    if produto_servico.ipi_situacao_tributaria:
+                        ipitrib = etree.SubElement(ipi, 'IPITrib')
+                        etree.SubElement(ipitrib, 'CST').text = produto_servico.ipi_situacao_tributaria
+                        etree.SubElement(ipitrib, 'vBC').text = '{:.2f}'.format(produto_servico.ipi_valor_base_calculo or 0)
+                        etree.SubElement(ipitrib, 'pIPI').text = '{:.2f}'.format(produto_servico.ipi_aliquota or 0)
+                        etree.SubElement(ipitrib, 'vIPI').text = '{:.2f}'.format(produto_servico.ipi_valor_ipi or 0)
 
 
         # apenas nfe
