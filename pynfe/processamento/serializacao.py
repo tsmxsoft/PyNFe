@@ -375,6 +375,7 @@ class SerializacaoXML(Serializacao):
                         etree.SubElement(icms_item, 'modBCST').text = str(produto_servico.icms_st_modalidade_determinacao_bc or 0)
                         if produto_servico.icms_st_percentual_adicional:
                             etree.SubElement(icms_item, 'pMVAST').text = str(produto_servico.icms_st_percentual_adicional or 0) # Percentual da margem de valor Adicionado do ICMS S
+                        if produto_servico.icms_st_percentual_reducao_bc:
                             etree.SubElement(icms_item, 'pRedBCST').text = str(produto_servico.icms_st_percentual_reducao_bc or 0) # APercentual da Redução de BC do ICMS ST
                         etree.SubElement(icms_item, 'vBCST').text = str(produto_servico.icms_st_valor_base_calculo or 0)
                         etree.SubElement(icms_item, 'pICMSST').text = str(produto_servico.icms_st_aliquota or 0)
