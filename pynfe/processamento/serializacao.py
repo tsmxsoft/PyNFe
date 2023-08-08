@@ -373,8 +373,10 @@ class SerializacaoXML(Serializacao):
                         # Modalidade de determinação da BC do ICMS ST
                         # 0=Preço tabelado ou máximo sugerido; 1=Lista Negativa (valor);2=Lista Positiva (valor);3=Lista Neutra (valor);4=Margem Valor Agregado (%);5=Pauta (valor);
                         etree.SubElement(icms_item, 'modBCST').text = str(produto_servico.icms_st_modalidade_determinacao_bc or 0)
-                        etree.SubElement(icms_item, 'pMVAST').text = str(produto_servico.icms_st_percentual_adicional or 0)    # Percentual da margem de valor Adicionado do ICMS ST
-                        etree.SubElement(icms_item, 'pRedBCST').text = str(produto_servico.icms_st_percentual_reducao_bc or 0) # APercentual da Redução de BC do ICMS ST
+
+                        if str(produto_servico.icms_st_modalidade_determinacao_bc) not in ["0"]:
+                            etree.SubElement(icms_item, 'pMVAST').text = str(produto_servico.icms_st_percentual_adicional or 0)    # Percentual da margem de valor Adicionado do ICMS ST
+                            etree.SubElement(icms_item, 'pRedBCST').text = str(produto_servico.icms_st_percentual_reducao_bc or 0) # APercentual da Redução de BC do ICMS ST
                         etree.SubElement(icms_item, 'vBCST').text = str(produto_servico.icms_st_valor_base_calculo or 0)
                         etree.SubElement(icms_item, 'pICMSST').text = str(produto_servico.icms_st_aliquota or 0)
                         etree.SubElement(icms_item, 'vICMSST').text = str(produto_servico.icms_st_valor or 0)
