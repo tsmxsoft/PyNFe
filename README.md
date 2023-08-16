@@ -95,3 +95,4 @@ backlog:
 - renomeado metodo serializar_evento (_serializar_evento)
 - removido metoco con.cancelar (utilizar con.evento)
 - add evento carta de correção (con.evento)
+- adicionado parâmetros para VENDA INTERESTADUAL PARA CONSUMIDOR FINAL NÃO-CONTRIBUINTE
