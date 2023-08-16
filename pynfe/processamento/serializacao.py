@@ -299,7 +299,7 @@ class SerializacaoXML(Serializacao):
             icms = etree.SubElement(imposto, 'ICMS')
             icms_csosn = ('102', '103', '300', '400')
             if produto_servico.icms_ufdest:
-                icms_item = etree.SubElement(icms, 'ICMSUFDest')
+                icms_item = etree.SubElement(imposto, 'ICMSUFDest')
                 etree.SubElement(icms_item, 'vBCUFDest').text = '{:.2f}'.format(produto_servico.icms_ufdest["bc_uf_dest"] or 0) #Valor da BC do ICMS na UF de destino
                 if "bc_fcp_uf_dest" in produto_servico.icms_ufdest:
                     etree.SubElement(icms_item, 'vBCFCPUFDest').text = '{:.2f}'.format(produto_servico.icms_ufdest["bc_fcp_uf_dest"] or 0) #Valor da BC FCP na UF de destino 
