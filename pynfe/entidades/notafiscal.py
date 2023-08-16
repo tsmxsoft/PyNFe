@@ -637,6 +637,10 @@ class NotaFiscalProduto(Entidade):
     #   - Origem (obrigatorio - seleciona de lista) - ICMS_ORIGENS
     icms_origem = int()
 
+    #  - ICMS
+    #   - Transação VENDA INTERESTADUAL PARA CONSUMIDOR FINAL NÃO-CONTRIBUINTE
+    icms_ufdest = None
+
     #   - ICMS
     #    - Modalidade de determinacao da BC ICMS (seleciona de lista) - ICMS_MODALIDADES
     icms_modalidade_determinacao_bc = int()
