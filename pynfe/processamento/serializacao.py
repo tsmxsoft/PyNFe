@@ -537,20 +537,20 @@ class SerializacaoXML(Serializacao):
                 # etree.SubElement(cofins_item, 'vAliqProd').text = produto_servico.cofins_aliquota_percentual
                 # etree.SubElement(cofins_item, 'vCOFINS').text = produto_servico.cofins_valor
 
-                # ICMSUFDest
-                if produto_servico.icms_ufdest:
-                    icms_item = etree.SubElement(imposto, 'ICMSUFDest')
-                    etree.SubElement(icms_item, 'vBCUFDest').text = '{:.2f}'.format(produto_servico.icms_ufdest["bc_uf_dest"] or 0) #Valor da BC do ICMS na UF de destino
-                    if "bc_fcp_uf_dest" in produto_servico.icms_ufdest:
-                        etree.SubElement(icms_item, 'vBCFCPUFDest').text = '{:.2f}'.format(produto_servico.icms_ufdest["bc_fcp_uf_dest"] or 0) #Valor da BC FCP na UF de destino 
-                    etree.SubElement(icms_item, 'pFCPUFDest').text = '{:.4f}'.format(produto_servico.icms_ufdest["fcp_percentual_uf_dest"] or 0) #Percentual do ICMS relativo ao Fundo de Combate à Pobreza (FCP) na UF de destino
-                    etree.SubElement(icms_item, 'pICMSUFDest').text = '{:.4f}'.format(produto_servico.icms_ufdest["icms_percentual_uf_dest"] or 0) #Alíquota interna da UF de destino 
-                    etree.SubElement(icms_item, 'pICMSInter').text = '{:.2f}'.format(produto_servico.icms_ufdest["icms_inter"] or 0) #Alíquota interestadual das UF envolvidas
-                    etree.SubElement(icms_item, 'pICMSInterPart').text = '{:.4f}'.format(produto_servico.icms_ufdest["icms_inter_part"] or 0) #Percentual provisório de partilha do ICMS Interestadual 
-                    if "fcp_uf_dest" in produto_servico.icms_ufdest:
-                        etree.SubElement(icms_item, 'vFCPUFDest').text = '{:.2f}'.format(produto_servico.icms_ufdest["fcp_uf_dest"] or 0) #Valor do ICMS relativo ao Fundo de Combate à Pobreza (FCP) da UF de destino
-                    etree.SubElement(icms_item, 'vICMSUFDest').text = '{:.2f}'.format(produto_servico.icms_ufdest["icms_uf_dest"] or 0) #Valor do ICMS Interestadual para a UF de destino
-                    etree.SubElement(icms_item, 'vICMSUFRemet').text = '{:.2f}'.format(produto_servico.icms_ufdest["icms_uf_remet"] or 0) #Valor do ICMS Interestadual para a UF do remetente
+            # ICMSUFDest
+            if produto_servico.icms_ufdest:
+                icms_item = etree.SubElement(imposto, 'ICMSUFDest')
+                etree.SubElement(icms_item, 'vBCUFDest').text = '{:.2f}'.format(produto_servico.icms_ufdest["bc_uf_dest"] or 0) #Valor da BC do ICMS na UF de destino
+                if "bc_fcp_uf_dest" in produto_servico.icms_ufdest:
+                    etree.SubElement(icms_item, 'vBCFCPUFDest').text = '{:.2f}'.format(produto_servico.icms_ufdest["bc_fcp_uf_dest"] or 0) #Valor da BC FCP na UF de destino 
+                etree.SubElement(icms_item, 'pFCPUFDest').text = '{:.4f}'.format(produto_servico.icms_ufdest["fcp_percentual_uf_dest"] or 0) #Percentual do ICMS relativo ao Fundo de Combate à Pobreza (FCP) na UF de destino
+                etree.SubElement(icms_item, 'pICMSUFDest').text = '{:.4f}'.format(produto_servico.icms_ufdest["icms_percentual_uf_dest"] or 0) #Alíquota interna da UF de destino 
+                etree.SubElement(icms_item, 'pICMSInter').text = '{:.2f}'.format(produto_servico.icms_ufdest["icms_inter"] or 0) #Alíquota interestadual das UF envolvidas
+                etree.SubElement(icms_item, 'pICMSInterPart').text = '{:.4f}'.format(produto_servico.icms_ufdest["icms_inter_part"] or 0) #Percentual provisório de partilha do ICMS Interestadual 
+                if "fcp_uf_dest" in produto_servico.icms_ufdest:
+                    etree.SubElement(icms_item, 'vFCPUFDest').text = '{:.2f}'.format(produto_servico.icms_ufdest["fcp_uf_dest"] or 0) #Valor do ICMS relativo ao Fundo de Combate à Pobreza (FCP) da UF de destino
+                etree.SubElement(icms_item, 'vICMSUFDest').text = '{:.2f}'.format(produto_servico.icms_ufdest["icms_uf_dest"] or 0) #Valor do ICMS Interestadual para a UF de destino
+                etree.SubElement(icms_item, 'vICMSUFRemet').text = '{:.2f}'.format(produto_servico.icms_ufdest["icms_uf_remet"] or 0) #Valor do ICMS Interestadual para a UF do remetente
 
         # tag impostoDevol
         if produto_servico.ipi_valor_ipi_dev:
