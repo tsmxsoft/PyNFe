@@ -367,6 +367,9 @@ class SerializacaoXML(Serializacao):
                         etree.SubElement(icms_item, 'vICMS').text = '{:.2f}'.format(produto_servico.icms_valor or 0) # Valor do ICMS
                     # 10=Tributada e com cobrança do ICMS por substituição tributária
                     elif produto_servico.icms_modalidade == '30':
+                        for child in icms_item.findall("modBC"):
+                            icms_item.remove(child)
+                        etree.SubElement(icms_item, 'modBCST').text = str(produto_servico.icms_st_modalidade_determinacao_bc or 0)
                         etree.SubElement(icms_item, 'vBCST').text = str(produto_servico.icms_st_valor_base_calculo or 0)
                         etree.SubElement(icms_item, 'pICMSST').text = str(produto_servico.icms_st_aliquota or 0)
                         etree.SubElement(icms_item, 'vICMSST').text = str(produto_servico.icms_st_valor or 0)
