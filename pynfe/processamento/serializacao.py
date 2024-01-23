@@ -660,11 +660,11 @@ class SerializacaoXML(Serializacao):
 
         # Intermediador
         try:
-            if nota_fiscal.intermed_cnpj and nota_fiscal.intermed_idcadinttran:
+            if nota_fiscal.intermed_cnpj:
                 if nota_fiscal.modelo == 55:
                     infintermed = etree.SubElement(raiz, 'infIntermed')
-                    etree.SubElement(infintermed, 'CNPJ').text = str(nota_fiscal.intermed_cnpj)
-                    etree.SubElement(infintermed, 'idCadIntTran').text = str(nota_fiscal.intermed_idcadinttran)
+                    etree.SubElement(infintermed, 'CNPJ').text = str(nota_fiscal.intermed_cnpj or "")
+                    etree.SubElement(infintermed, 'idCadIntTran').text = str(nota_fiscal.intermed_idcadinttran or "")
         except:
             traceback.print_exc()
 
