@@ -316,16 +316,6 @@ class SerializacaoXML(Serializacao):
                 etree.SubElement(icms_item, 'vBC').text = '{:.2f}'.format(produto_servico.icms_valor_base_calculo or 0)  # Valor da BC do ICMS
                 etree.SubElement(icms_item, 'pICMS').text = '{:.2f}'.format(produto_servico.icms_aliquota or 0)          # Alíquota do imposto
                 etree.SubElement(icms_item, 'vICMS').text = '{:.2f}'.format(produto_servico.icms_valor or 0) # Valor do ICMS
-
-                etree.SubElement(icms_item, 'modBCST').text = str(produto_servico.icms_st_modalidade_determinacao_bc or 0)
-                if produto_servico.icms_st_percentual_adicional:
-                    etree.SubElement(icms_item, 'pMVAST').text = '{:.2f}'.format(produto_servico.icms_st_percentual_adicional or 0) # Percentual da margem de valor Adicionado do ICMS S
-                if produto_servico.icms_st_percentual_reducao_bc:
-                    etree.SubElement(icms_item, 'pRedBCST').text = '{:.2f}'.format(produto_servico.icms_st_percentual_reducao_bc or 0) # APercentual da Redução de BC do ICMS ST
-                etree.SubElement(icms_item, 'vBCST').text = '{:.2f}'.format(produto_servico.icms_st_valor_base_calculo or 0)
-                etree.SubElement(icms_item, 'pICMSST').text = '{:.2f}'.format(produto_servico.icms_st_aliquota or 0)
-                etree.SubElement(icms_item, 'vICMSST').text = '{:.2f}'.format(produto_servico.icms_st_valor or 0)
-
             elif produto_servico.icms_modalidade == 'ST':
                 icms_item = etree.SubElement(icms, 'ICMS'+produto_servico.icms_modalidade)
                 etree.SubElement(icms_item, 'orig').text = str(produto_servico.icms_origem)
@@ -667,6 +657,14 @@ class SerializacaoXML(Serializacao):
             etree.SubElement(ide, 'indPres').text = str(nota_fiscal.indicador_presencial)
         etree.SubElement(ide, 'procEmi').text = str(nota_fiscal.processo_emissao)
         etree.SubElement(ide, 'verProc').text = '%s %s' % (self._nome_aplicacao, nota_fiscal.versao_processo_emissao)
+
+        # Intermediador
+        if nota_fiscal.intermed_cnpj and nota_fiscal.intermed_idcadinttran:
+            if nota_fiscal.modelo == 55:
+                infintermed = etree.SubElement(raiz, 'infIntermed')
+                etree.SubElement(infintermed, 'CNPJ').text = str(nota_fiscal.intermed_cnpj)
+                etree.SubElement(infintermed, 'idCadIntTran').text = str(nota_fiscal.intermed_idcadinttran)
+        
 
         ### NF-e referenciada (utilizado em casos de devolução/garantia) ###
         # Apenas NF-e

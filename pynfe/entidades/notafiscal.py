@@ -371,6 +371,10 @@ class NotaFiscal(Entidade):
     # - Processo Referenciado (lista 1 para * / ManyToManyField)
     processos_referenciados = None
 
+    indpres = int()
+    intermed_cnpj = int()
+    intermed_idcadinttran = str()
+
     def __init__(self, *args, **kwargs):
         self.notas_fiscais_referenciadas = []
         self.produtos_e_servicos = []
