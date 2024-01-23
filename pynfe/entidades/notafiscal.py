@@ -111,6 +111,12 @@ class NotaFiscal(Entidade):
     """
     indicador_presencial = int()
 
+    """
+        Intermediador
+    """
+    intermed_cnpj = str()
+    intermed_idcadinttran = str()
+
     """ nfce suporta apenas operação interna
         Identificador de local de destino da operação 1=Operação interna;2=Operação interestadual;3=Operação com exterior.
     """
@@ -370,10 +376,6 @@ class NotaFiscal(Entidade):
 
     # - Processo Referenciado (lista 1 para * / ManyToManyField)
     processos_referenciados = None
-
-    indpres = int()
-    intermed_cnpj = int()
-    intermed_idcadinttran = str()
 
     def __init__(self, *args, **kwargs):
         self.notas_fiscais_referenciadas = []

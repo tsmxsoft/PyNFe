@@ -659,12 +659,14 @@ class SerializacaoXML(Serializacao):
         etree.SubElement(ide, 'verProc').text = '%s %s' % (self._nome_aplicacao, nota_fiscal.versao_processo_emissao)
 
         # Intermediador
-        if nota_fiscal.intermed_cnpj and nota_fiscal.intermed_idcadinttran:
-            if nota_fiscal.modelo == 55:
-                infintermed = etree.SubElement(raiz, 'infIntermed')
-                etree.SubElement(infintermed, 'CNPJ').text = str(nota_fiscal.intermed_cnpj)
-                etree.SubElement(infintermed, 'idCadIntTran').text = str(nota_fiscal.intermed_idcadinttran)
-        
+        try:
+            if nota_fiscal.intermed_cnpj and nota_fiscal.intermed_idcadinttran:
+                if nota_fiscal.modelo == 55:
+                    infintermed = etree.SubElement(raiz, 'infIntermed')
+                    etree.SubElement(infintermed, 'CNPJ').text = str(nota_fiscal.intermed_cnpj)
+                    etree.SubElement(infintermed, 'idCadIntTran').text = str(nota_fiscal.intermed_idcadinttran)
+        except:
+            traceback.print_exc()
 
         ### NF-e referenciada (utilizado em casos de devolução/garantia) ###
         # Apenas NF-e
