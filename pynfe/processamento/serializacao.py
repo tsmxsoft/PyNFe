@@ -358,7 +358,7 @@ class SerializacaoXML(Serializacao):
                     etree.SubElement(icms_item, 'orig').text = str(produto_servico.icms_origem)
                     etree.SubElement(icms_item, 'CST').text = produto_servico.icms_modalidade
                     # Modalidade de determinação da BC do ICMS: 0=Margem Valor Agregado (%); 1=Pauta (Valor); 2=Preço Tabelado Máx. (valor); 3=Valor da operação.
-                    if produto_servico.icms_modalidade not in ['40','50','70']:
+                    if produto_servico.icms_modalidade not in ['40','50']:
                         etree.SubElement(icms_item, 'modBC').text = str(produto_servico.icms_modalidade_determinacao_bc)
                     # 00=Tributada integralmente.
                     if produto_servico.icms_modalidade == '00':
@@ -395,9 +395,9 @@ class SerializacaoXML(Serializacao):
                                 etree.SubElement(icms_item, 'pMVAST').text = str(produto_servico.icms_st_percentual_adicional or 0) # Percentual da margem de valor Adicionado do ICMS S
                             if produto_servico.icms_st_percentual_reducao_bc:
                                 etree.SubElement(icms_item, 'pRedBCST').text = str(produto_servico.icms_st_percentual_reducao_bc or 0) # APercentual da Redução de BC do ICMS ST
-                            etree.SubElement(icms_item, 'vBCST').text = str(produto_servico.icms_st_valor_base_calculo or 0)
+                            etree.SubElement(icms_item, 'vBCST').text = '{:.2f}'.format(produto_servico.icms_st_valor_base_calculo or 0)
                             etree.SubElement(icms_item, 'pICMSST').text = str(produto_servico.icms_st_aliquota or 0)
-                            etree.SubElement(icms_item, 'vICMSST').text = str(produto_servico.icms_st_valor or 0)
+                            etree.SubElement(icms_item, 'vICMSST').text = '{:.2f}'.format(produto_servico.icms_st_valor or 0)
                         # NT_2016_002
                         # Inclusão das regras de validação N17b-20, N23b-20 e N27b-20 que impedem que seja informado zero como percentual de FCP ou FCP ST.
                         # Os campos relativos ao Fundo de Combate à Pobreza só devem ser informados se o produto estiver sujeito a incidência do mesmo.
@@ -574,7 +574,7 @@ class SerializacaoXML(Serializacao):
                 etree.SubElement(icms_item, 'vICMSUFRemet').text = '{:.2f}'.format(produto_servico.icms_ufdest["icms_uf_remet"] or 0) #Valor do ICMS Interestadual para a UF do remetente
 
         # tag impostoDevol
-        if produto_servico.ipi_valor_ipi_dev:
+        if produto_servico.ipi_valor_ipi_dev or produto_servico.icms_modalidade in ['70']:
             impostodevol = etree.SubElement(raiz, 'impostoDevol')
             etree.SubElement(impostodevol, 'pDevol').text = '{:.2f}'.format(produto_servico.pdevol or 100)
             ipidev = etree.SubElement(impostodevol, 'IPI')
