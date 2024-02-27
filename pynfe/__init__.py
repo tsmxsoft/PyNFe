@@ -1,5 +1,5 @@
 def get_version():
-    return '0.4.95'
+    return '0.4.96'
 
 
 __version__ = get_version()
