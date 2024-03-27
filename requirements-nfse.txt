@@ -1,3 +1,0 @@
-# Opcional para NFS-e
-suds-jurko
-pyxb

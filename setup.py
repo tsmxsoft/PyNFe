@@ -1,19 +1,5 @@
 #!/usr/bin/env python
 from setuptools import setup, find_packages
-try:  # for pip >= 10
-    from pip._internal.req import parse_requirements as parse
-except:  # for pip <= 9.0.3
-    try:
-        from pip.req import parse_requirements as parse
-    except:
-        pass
-
-def requirements(f):
-    try:
-        return [str(i.req) for i in parse(f, session=False)]
-    except:
-        return [str(i.requirement) for i in parse(f, session=False)]
-
 
 setup(
     name='PyNFe',
@@ -22,6 +8,14 @@ setup(
     package_data={
         'pynfe': ['data/**/*.txt','data/**/*.xsd'],
     },
-    install_requires=requirements('requirements.txt'),
+    install_requires=[
+        "pyopenssl",
+        "requests",
+        "lxml",
+        "signxml",
+        "pyxb",
+        "six >= 1.10.0",
+        "python-dateutil >=2.2",
+    ],
     zip_safe=False,
 )
