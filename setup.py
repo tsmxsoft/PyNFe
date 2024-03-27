@@ -10,11 +10,11 @@ setup(
     },
     install_requires=[
         "pyopenssl",
-        "requests",
+        "requests == 2.27.1",
         "lxml",
         "signxml",
         "pyxb",
-        "six >= 1.10.0",
+        "six",
         "python-dateutil >=2.2",
     ],
     zip_safe=False,
