@@ -84,7 +84,7 @@
 3305703	Sumidouro
 3305752	Tanguá
 3305802	Teresópolis
-3305901	Trajano de Morais
+3305901	Trajano de Moraes
 3306008	Três Rios
 3306107	Valença
 3306156	Varre-Sai
