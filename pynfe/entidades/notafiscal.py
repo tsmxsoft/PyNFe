@@ -87,6 +87,10 @@ class NotaFiscal(Entidade):
     cartao_tipo_bandeira = str()
 
     cartao_numero_autorizacao = str()
+    
+    cartao_cnpj_receb = str()
+    
+    cartao_terminal_pgto = str()
 
     cartao_valor_troco = Decimal()
 
