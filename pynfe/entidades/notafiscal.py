@@ -443,7 +443,7 @@ class NotaFiscal(Entidade):
         if kwargs.get('issqn_valor_base_calculo'):
             self.totais_icms_total_produtos_e_servicos -= obj.issqn_valor_base_calculo
             self.totais_issqn_base_calculo_iss += obj.issqn_valor_base_calculo
-            self.totais_issqn_total_iss += obj.issqn_valor or Decimal('0.00')
+            self.totais_issqn_total_iss += Decimal("{:.2f}".format(obj.issqn_valor)) or Decimal('0.00')
             self.totais_issqn_pis += obj.pis_valor
             self.totais_issqn_cofins += obj.cofins_valor
             self.totais_issqn_total += obj.issqn_valor
