@@ -510,7 +510,7 @@ class SerializacaoXML(Serializacao):
                 etree.SubElement(pis_item, 'CST').text = produto_servico.pis_modalidade
                 etree.SubElement(pis_item, 'vBC').text = '{:.2f}'.format(produto_servico.pis_valor_base_calculo or 0)
                 etree.SubElement(pis_item, 'pPIS').text = '{:.2f}'.format(produto_servico.pis_aliquota_percentual or 0)
-                if str(produto_servico.pis_modalidade) not in ['49','98','99']:
+                if not produto_servico.pis_aliquota_percentual or Decimal(produto_servico.pis_aliquota_percentual) == Decimal('0.00'):
                     etree.SubElement(pis_item, 'qBCProd').text = '{:.4f}'.format(produto_servico.quantidade_comercial)
                     etree.SubElement(pis_item, 'vAliqProd').text = str(produto_servico.pis_aliquota_percentual)
                 etree.SubElement(pis_item, 'vPIS').text = '{:.2f}'.format(produto_servico.pis_valor or 0)
@@ -546,8 +546,9 @@ class SerializacaoXML(Serializacao):
                 etree.SubElement(cofins_item, 'CST').text = produto_servico.cofins_modalidade
                 etree.SubElement(cofins_item, 'vBC').text = '{:.2f}'.format(produto_servico.cofins_valor_base_calculo or 0)
                 etree.SubElement(cofins_item, 'pCOFINS').text = '{:.2f}'.format(produto_servico.cofins_aliquota_percentual or 0)
-                if str(produto_servico.cofins_modalidade) not in ['49','98','99']:
-                    etree.SubElement(cofins_item, 'vAliqProd').text = '{:.2f}'.format(produto_servico.cofins_aliquota_percentual or 0)
+                if not produto_servico.cofins_aliquota_percentual or Decimal(produto_servico.cofins_aliquota_percentual) == Decimal('0.00'):
+                    etree.SubElement(cofins_item, 'qBCProd').text = '{:.2f}'.format(produto_servico.quantidade_comercial)
+                    etree.SubElement(cofins_item, 'vAliqProd').text = '{:.2f}'.format(produto_servico.cofins_aliquota_percentual)
                 etree.SubElement(cofins_item, 'vCOFINS').text = '{:.2f}'.format(produto_servico.cofins_valor or 0)
 
                 ## COFINSST
