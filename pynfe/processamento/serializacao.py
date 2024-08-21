@@ -671,15 +671,6 @@ class SerializacaoXML(Serializacao):
         etree.SubElement(ide, 'procEmi').text = str(nota_fiscal.processo_emissao)
         etree.SubElement(ide, 'verProc').text = '%s %s' % (self._nome_aplicacao, nota_fiscal.versao_processo_emissao)
 
-        # Intermediador
-        try:
-            if nota_fiscal.intermed_cnpj:
-                if nota_fiscal.modelo == 55:
-                    infintermed = etree.SubElement(raiz, 'infIntermed')
-                    etree.SubElement(infintermed, 'CNPJ').text = str(nota_fiscal.intermed_cnpj or "")
-                    etree.SubElement(infintermed, 'idCadIntTran').text = str(nota_fiscal.intermed_idcadinttran or "")
-        except:
-            traceback.print_exc()
 
         ### NF-e referenciada (utilizado em casos de devolução/garantia) ###
         # Apenas NF-e
@@ -924,6 +915,16 @@ class SerializacaoXML(Serializacao):
                 
             # troco
             # etree.SubElement(pag, 'vTroco').text = str('')
+
+        # Intermediador
+        try:
+            if nota_fiscal.intermed_cnpj:
+                if nota_fiscal.modelo == 55:
+                    infintermed = etree.SubElement(raiz, 'infIntermed')
+                    etree.SubElement(infintermed, 'CNPJ').text = str(nota_fiscal.intermed_cnpj or "")[:14]
+                    etree.SubElement(infintermed, 'idCadIntTran').text = str(nota_fiscal.intermed_idcadinttran or "")[:60]
+        except:
+            traceback.print_exc()
 
         # Informações adicionais
         if nota_fiscal.informacoes_adicionais_interesse_fisco or nota_fiscal.informacoes_complementares_interesse_contribuinte:
