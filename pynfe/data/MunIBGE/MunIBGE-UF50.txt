@@ -1,4 +1,4 @@
-﻿5000203	Água Clara
+5000203	Água Clara
 5000252	Alcinópolis
 5000609	Amambaí
 5000708	Anastácio
@@ -55,7 +55,7 @@
 5006002	Nova Alvorada do Sul
 5006200	Nova Andradina
 5006259	Novo Horizonte do Sul
-5006275 Paraiso das Aguas
+5006275	Paraiso das Aguas
 5006309	Paranaíba
 5006358	Paranhos
 5006408	Pedro Gomes
