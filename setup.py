@@ -10,7 +10,7 @@ setup(
     },
     install_requires=[
         "pyopenssl",
-        "requests == 2.27.2",
+        "requests",
         "lxml",
         "signxml",
         "pyxb",
