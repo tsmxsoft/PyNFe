@@ -508,11 +508,13 @@ class SerializacaoXML(Serializacao):
             else:
                 pis_item = etree.SubElement(pis, 'PISOutr')
                 etree.SubElement(pis_item, 'CST').text = produto_servico.pis_modalidade
-                etree.SubElement(pis_item, 'vBC').text = '{:.2f}'.format(produto_servico.pis_valor_base_calculo or 0)
-                etree.SubElement(pis_item, 'pPIS').text = '{:.2f}'.format(produto_servico.pis_aliquota_percentual or 0)
-                if str(produto_servico.pis_modalidade) not in ['49','98','99']:
+                if produto_servico.pis_aliquota_percentual and Decimal(produto_servico.pis_aliquota_percentual) != Decimal('0.00'):
+                    etree.SubElement(pis_item, 'vBC').text = '{:.2f}'.format(produto_servico.pis_valor_base_calculo or 0)
+                    etree.SubElement(pis_item, 'pPIS').text = '{:.2f}'.format(produto_servico.pis_aliquota_percentual or 0)
+                else:
                     etree.SubElement(pis_item, 'qBCProd').text = '{:.4f}'.format(produto_servico.quantidade_comercial)
                     etree.SubElement(pis_item, 'vAliqProd').text = str(produto_servico.pis_aliquota_percentual)
+                    
                 etree.SubElement(pis_item, 'vPIS').text = '{:.2f}'.format(produto_servico.pis_valor or 0)
 
                 ## PISST
@@ -544,10 +546,12 @@ class SerializacaoXML(Serializacao):
             else:
                 cofins_item = etree.SubElement(cofins, 'COFINSOutr')
                 etree.SubElement(cofins_item, 'CST').text = produto_servico.cofins_modalidade
-                etree.SubElement(cofins_item, 'vBC').text = '{:.2f}'.format(produto_servico.cofins_valor_base_calculo or 0)
-                etree.SubElement(cofins_item, 'pCOFINS').text = '{:.2f}'.format(produto_servico.cofins_aliquota_percentual or 0)
-                if str(produto_servico.cofins_modalidade) not in ['49','98','99']:
-                    etree.SubElement(cofins_item, 'vAliqProd').text = '{:.2f}'.format(produto_servico.cofins_aliquota_percentual or 0)
+                if produto_servico.cofins_aliquota_percentual and Decimal(produto_servico.cofins_aliquota_percentual) != Decimal('0.00'):
+                    etree.SubElement(cofins_item, 'vBC').text = '{:.2f}'.format(produto_servico.cofins_valor_base_calculo or 0)
+                    etree.SubElement(cofins_item, 'pCOFINS').text = '{:.2f}'.format(produto_servico.cofins_aliquota_percentual or 0)
+                else:
+                    etree.SubElement(cofins_item, 'qBCProd').text = '{:.2f}'.format(produto_servico.quantidade_comercial)
+                    etree.SubElement(cofins_item, 'vAliqProd').text = '{:.2f}'.format(produto_servico.cofins_aliquota_percentual)
                 etree.SubElement(cofins_item, 'vCOFINS').text = '{:.2f}'.format(produto_servico.cofins_valor or 0)
 
                 ## COFINSST
@@ -670,15 +674,6 @@ class SerializacaoXML(Serializacao):
         etree.SubElement(ide, 'procEmi').text = str(nota_fiscal.processo_emissao)
         etree.SubElement(ide, 'verProc').text = '%s %s' % (self._nome_aplicacao, nota_fiscal.versao_processo_emissao)
 
-        # Intermediador
-        try:
-            if nota_fiscal.intermed_cnpj:
-                if nota_fiscal.modelo == 55:
-                    infintermed = etree.SubElement(raiz, 'infIntermed')
-                    etree.SubElement(infintermed, 'CNPJ').text = str(nota_fiscal.intermed_cnpj or "")
-                    etree.SubElement(infintermed, 'idCadIntTran').text = str(nota_fiscal.intermed_idcadinttran or "")
-        except:
-            traceback.print_exc()
 
         ### NF-e referenciada (utilizado em casos de devolução/garantia) ###
         # Apenas NF-e
@@ -923,6 +918,16 @@ class SerializacaoXML(Serializacao):
                 
             # troco
             # etree.SubElement(pag, 'vTroco').text = str('')
+
+        # Intermediador
+        try:
+            if nota_fiscal.intermed_cnpj:
+                if nota_fiscal.modelo == 55:
+                    infintermed = etree.SubElement(raiz, 'infIntermed')
+                    etree.SubElement(infintermed, 'CNPJ').text = str(nota_fiscal.intermed_cnpj or "")[:14]
+                    etree.SubElement(infintermed, 'idCadIntTran').text = str(nota_fiscal.intermed_idcadinttran or "")[:60]
+        except:
+            traceback.print_exc()
 
         # Informações adicionais
         if nota_fiscal.informacoes_adicionais_interesse_fisco or nota_fiscal.informacoes_complementares_interesse_contribuinte:

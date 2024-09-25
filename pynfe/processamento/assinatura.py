@@ -3,9 +3,12 @@ from pynfe.utils import etree, remover_acentos
 from pynfe.utils.flags import NAMESPACE_SIG
 import subprocess
 import signxml
-from signxml import XMLSigner
+from signxml import XMLSigner as XMLSignerOriginal
 from pynfe.entidades import CertificadoA1
 
+class XMLSigner(XMLSignerOriginal):
+    def check_deprecated_methods(self):
+        pass
 
 class Assinatura(object):
     """Classe abstrata responsavel por definir os metodos e logica das classes
