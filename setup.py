@@ -3,14 +3,14 @@ from setuptools import setup, find_packages
 
 setup(
     name='PyNFe',
-    version='0.4.104',
+    version='0.4.105',
     packages=find_packages(),
     package_data={
         'pynfe': ['data/**/*.txt','data/**/*.xsd'],
     },
     install_requires=[
         "pyopenssl",
-        "requests",
+        "requests == 2.27.1",
         "lxml",
         "signxml",
         "pyxb",
