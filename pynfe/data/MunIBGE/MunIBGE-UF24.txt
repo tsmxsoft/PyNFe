@@ -56,7 +56,7 @@
 2405009	Jaçanã
 2405108	Jandaíra
 2405207	Janduís
-2405306	Januário Cicco
+2405306	Boa Saúde
 2405405	Japi
 2405504	Jardim de Angicos
 2405603	Jardim de Piranhas
