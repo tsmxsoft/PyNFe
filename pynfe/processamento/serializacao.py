@@ -312,8 +312,8 @@ class SerializacaoXML(Serializacao):
                 icms_item = etree.SubElement(icms, 'ICMSSN201')
                 etree.SubElement(icms_item, 'orig').text = str(produto_servico.icms_origem)
                 etree.SubElement(icms_item, 'CSOSN').text = produto_servico.icms_csosn
-                etree.SubElement(icms_item, 'modBCST').text = produto_servico.icms_modalidade
-                etree.SubElement(icms_item, 'pMVAST').text = str(produto_servico.icms_st_percentual_adicional or 0)
+                etree.SubElement(icms_item, 'modBCST').text = produto_servico.icms_modalidade_determinacao_bc
+                etree.SubElement(icms_item, 'pMVAST').text =  '{:.2f}'.format(produto_servico.icms_st_percentual_adicional or 0)
                 etree.SubElement(icms_item, 'pRedBCST').text = '{:.2f}'.format(produto_servico.icms_st_valor_base_calculo or 0)
                 etree.SubElement(icms_item, 'vBCST').text = str(produto_servico.icms_st_valor_base_calculo or 0)
                 etree.SubElement(icms_item, 'pICMSST').text = str(produto_servico.icms_st_aliquota or 0)
