@@ -243,7 +243,7 @@ class SerializacaoXML(Serializacao):
         #
         """ Código Especificador da Substituição Tributária – CEST, que estabelece a sistemática de uniformização e identificação das mercadorias e bens passíveis de
         sujeição aos regimes de substituição tributária e de antecipação de recolhimento do ICMS. """
-        if produto_servico.cest and produto_servico.icms_modalidade in ['41', '60', '70', '400', '500']:
+        if produto_servico.cest and produto_servico.icms_modalidade in ['41', '60', '70', '201', '400', '500']:
             etree.SubElement(prod, 'CEST').text = produto_servico.cest
 
         if produto_servico.cbenef:
