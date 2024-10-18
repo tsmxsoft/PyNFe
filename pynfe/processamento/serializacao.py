@@ -243,7 +243,7 @@ class SerializacaoXML(Serializacao):
         #
         """ Código Especificador da Substituição Tributária – CEST, que estabelece a sistemática de uniformização e identificação das mercadorias e bens passíveis de
         sujeição aos regimes de substituição tributária e de antecipação de recolhimento do ICMS. """
-        if produto_servico.cest and produto_servico.icms_modalidade in ['41', '60', '70', '400', '500']:
+        if produto_servico.cest and produto_servico.icms_modalidade in ['41', '60', '70', '201', '400', '500']:
             etree.SubElement(prod, 'CEST').text = produto_servico.cest
 
         if produto_servico.cbenef:
@@ -308,6 +308,26 @@ class SerializacaoXML(Serializacao):
                 etree.SubElement(icms_item, 'CSOSN').text = produto_servico.icms_csosn
                 etree.SubElement(icms_item, 'pCredSN').text = str(produto_servico.icms_aliquota)       # Alíquota aplicável de cálculo do crédito (Simples Nacional).
                 etree.SubElement(icms_item, 'vCredICMSSN').text = '{:.2f}'.format(produto_servico.icms_credito or 0)  # Valor crédito do ICMS que pode ser aproveitado nos termos do art. 23 da LC 123 (Simples Nacional)
+            elif produto_servico.icms_modalidade == '201' and int(nota_fiscal.emitente.codigo_de_regime_tributario) == 1:
+                icms_item = etree.SubElement(icms, 'ICMSSN201')
+                etree.SubElement(icms_item, 'orig').text = str(produto_servico.icms_origem)
+                etree.SubElement(icms_item, 'CSOSN').text = produto_servico.icms_csosn
+                etree.SubElement(icms_item, 'modBCST').text = str(produto_servico.icms_modalidade_determinacao_bc)
+                etree.SubElement(icms_item, 'pMVAST').text =  '{:.2f}'.format(produto_servico.icms_st_percentual_adicional or 0)
+                etree.SubElement(icms_item, 'pRedBCST').text = '{:.2f}'.format(produto_servico.icms_st_valor_base_calculo or 0)
+                etree.SubElement(icms_item, 'vBCST').text = '{:.2f}'.format(produto_servico.icms_st_valor_base_calculo or 0)
+                etree.SubElement(icms_item, 'pICMSST').text = '{:.4f}'.format(produto_servico.icms_st_aliquota or 0)
+                etree.SubElement(icms_item, 'vICMSST').text = '{:.2f}'.format(produto_servico.icms_st_valor or 0)
+                # NT_2016_002
+                # Inclusão das regras de validação N17b-20, N23b-20 e N27b-20 que impedem que seja informado zero como percentual de FCP ou FCP ST.
+                # Os campos relativos ao Fundo de Combate à Pobreza só devem ser informados se o produto estiver sujeito a incidência do mesmo.
+                if produto_servico.fcp_valor:
+                    etree.SubElement(icms_item, 'vBCFCP').text = '{:.2f}'.format(produto_servico.fcp_base_calculo or 0)  # Base de calculo FCP
+                    etree.SubElement(icms_item, 'pFCP').text = '{:.2f}'.format(produto_servico.fcp_percentual or 0)  # Percentual FCP
+                    etree.SubElement(icms_item, 'vFCP').text = '{:.2f}'.format(produto_servico.fcp_valor or 0)  # Valor Fundo Combate a Pobreza
+                etree.SubElement(icms_item, 'pCredSN').text = str(produto_servico.icms_aliquota)       # Alíquota aplicável de cálculo do crédito (Simples Nacional).
+                etree.SubElement(icms_item, 'vCredICMSSN').text = '{:.2f}'.format(produto_servico.icms_credito or 0)  # Valor crédito do ICMS que pode ser aproveitado nos termos do art. 23 da LC 123 (Simples Nacional)
+
             elif produto_servico.icms_modalidade == '900':
                 icms_item = etree.SubElement(icms, 'ICMSSN'+produto_servico.icms_modalidade)
                 etree.SubElement(icms_item, 'orig').text = str(produto_servico.icms_origem)
