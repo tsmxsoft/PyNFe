@@ -748,7 +748,7 @@ class SerializacaoXML(Serializacao):
         etree.SubElement(icms_total, 'vST').text = '{:.2f}'.format(nota_fiscal.totais_icms_st_total)
         etree.SubElement(icms_total, 'vFCPST').text = '{:.2f}'.format(nota_fiscal.totais_fcp_st)
         etree.SubElement(icms_total, 'vFCPSTRet').text = '{:.2f}'.format(nota_fiscal.totais_fcp_st_ret)
-        etree.SubElement(icms_total, 'vProd').text = '{:.2f}'.format(nota_fiscal.totais_icms_total_produtos_e_servicos)
+        etree.SubElement(icms_total, 'vProd').text = '{:.2f}'.format(abs(nota_fiscal.totais_icms_total_produtos_e_servicos))
         etree.SubElement(icms_total, 'vFrete').text = '{:.2f}'.format(nota_fiscal.totais_icms_total_frete)
         etree.SubElement(icms_total, 'vSeg').text = '{:.2f}'.format(nota_fiscal.totais_icms_total_seguro)
         etree.SubElement(icms_total, 'vDesc').text = '{:.2f}'.format(nota_fiscal.totais_icms_total_desconto)
