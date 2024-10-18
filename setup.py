@@ -3,7 +3,7 @@ from setuptools import setup, find_packages
 
 setup(
     name='PyNFe',
-    version='0.4.106',
+    version='0.4.110',
     packages=find_packages(),
     package_data={
         'pynfe': ['data/**/*.txt','data/**/*.xsd'],
