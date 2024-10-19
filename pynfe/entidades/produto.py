@@ -56,6 +56,9 @@ class Produto(Entidade):
     # 0=Valor do item (vProd) não compõe o valor total da NF-e 
     # 1=Valor do item (vProd) compõe o valor total da NF-e (vProd)
     ind_total = int()
+
+    xped = str()
+    nitemped = str()
     
     # # Impostos
 

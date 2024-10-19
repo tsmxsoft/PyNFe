@@ -274,6 +274,14 @@ class SerializacaoXML(Serializacao):
         """
         etree.SubElement(prod, 'indTot').text = str(produto_servico.ind_total)
 
+        try:
+            if produto_servico.xped:
+                etree.SubElement(prod, 'xPed').text = str(produto_servico.xped)
+            if produto_servico.nitemped:
+                etree.SubElement(prod, 'nItemPed').text = str(produto_servico.nitemped)
+        except:
+            traceback.print_exc()
+
         """ Informação de interesse do emissor para controle do B2B.(v2.0) """
         # Número do Pedido de Compra. Tam 1-15
         if produto_servico.numero_pedido:
