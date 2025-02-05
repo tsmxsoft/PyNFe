@@ -347,11 +347,11 @@ class SerializacaoXML(Serializacao):
                 etree.SubElement(icms_item, 'vICMS').text = '{:.2f}'.format(produto_servico.icms_valor or 0) # Valor do ICMS
 
                 etree.SubElement(icms_item, 'modBCST').text = str(produto_servico.icms_st_modalidade_determinacao_bc or 0)
-                etree.SubElement(icms_item, 'pMVAST').text =  '{:.2f}'.format(produto_servico.icms_st_percentual_adicional or 0)
-                etree.SubElement(icms_item, 'pRedBCST').text = '{:.2f}'.format(produto_servico.icms_st_valor_base_calculo or 0)
-                etree.SubElement(icms_item, 'vBCST').text = str(produto_servico.icms_st_valor_base_calculo or 0)
-                etree.SubElement(icms_item, 'pICMSST').text = str(produto_servico.icms_st_aliquota or 0)
-                etree.SubElement(icms_item, 'vICMSST').text = str(produto_servico.icms_st_valor or 0)
+                etree.SubElement(icms_item, 'pMVAST').text =  '{:.4f}'.format(produto_servico.icms_st_percentual_adicional or 0)
+                etree.SubElement(icms_item, 'pRedBCST').text = '{:.4f}'.format(produto_servico.icms_st_valor_base_calculo or 0)
+                etree.SubElement(icms_item, 'vBCST').text = '{:.2f}'.format(produto_servico.icms_st_valor_base_calculo or 0)
+                etree.SubElement(icms_item, 'pICMSST').text = '{:.4f}'.format(produto_servico.icms_st_aliquota or 0)
+                etree.SubElement(icms_item, 'vICMSST').text = '{:.2f}'.format(produto_servico.icms_st_valor or 0)
             elif produto_servico.icms_modalidade == 'ST':
                 icms_item = etree.SubElement(icms, 'ICMS'+produto_servico.icms_modalidade)
                 etree.SubElement(icms_item, 'orig').text = str(produto_servico.icms_origem)
