@@ -1,9 +1,10 @@
 #!/usr/bin/env python
 from setuptools import setup, find_packages
+from pynfe import get_version
 
 setup(
     name='PyNFe',
-    version='0.4.111',
+    version=get_version(),
     packages=find_packages(),
     package_data={
         'pynfe': ['data/**/*.txt','data/**/*.xsd'],
