@@ -1009,7 +1009,7 @@ class SerializacaoXML(Serializacao):
             etree.SubElement(det, 'nProt').text = evento.protocolo
             etree.SubElement(det, 'xJust').text = evento.justificativa
         elif evento.descricao == 'Carta de Correcao':
-            etree.SubElement(det, 'xCorrecao').text = evento.correcao
+            etree.SubElement(det, 'xCorrecao').text = re.sub(r'[\t\r\n]','',evento.correcao)
             etree.SubElement(det, 'xCondUso').text = evento.cond_uso
         elif evento.descricao == 'Operacao nao Realizada':
             etree.SubElement(det, 'xJust').text = evento.justificativa
