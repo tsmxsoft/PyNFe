@@ -15,7 +15,7 @@ setup(
         "lxml",
         "signxml",
         "pyxb",
-        "six == 1.10.0",
+        "six == 1.16.0",
         "python-dateutil >=2.2",
     ],
     zip_safe=False,
