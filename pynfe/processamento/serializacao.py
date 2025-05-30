@@ -361,7 +361,7 @@ class SerializacaoXML(Serializacao):
                 etree.SubElement(icms_item, 'vICMSSTRet').text = ''     # Informar o valor do ICMS ST retido na UF remetente
                 etree.SubElement(icms_item, 'vBCSTDest').text = ''      # Informar o valor da BC do ICMS ST da UF destino
                 etree.SubElement(icms_item, 'vICMSSTDest').text = ''    # Informar o valor do ICMS ST da UF destino
-            elif produto_servico.icms_modalidade == '500':
+            elif produto_servico.icms_modalidade in ['500','900']:
                 icms_item = etree.SubElement(icms, 'ICMSSN'+produto_servico.icms_modalidade)
                 etree.SubElement(icms_item, 'orig').text = str(produto_servico.icms_origem)
                 etree.SubElement(icms_item, 'CSOSN').text = produto_servico.icms_csosn
