@@ -99,7 +99,7 @@ class ComunicacaoSefaz(Comunicacao):
                             raiz = etree.Element('nfeProc', xmlns=NAMESPACE_NFE, versao=VERSAO_PADRAO)
                             raiz.append(nota_fiscal)
                             raiz.append(prot_nfe)
-                            return 0, raiz
+                            return 0, raiz, retorno
 
                         # denegado o uso da NF-e 
                         # 110 = Uso Denegado
@@ -110,7 +110,7 @@ class ComunicacaoSefaz(Comunicacao):
                             raiz = etree.Element('nfeProc', xmlns=NAMESPACE_NFE, versao=VERSAO_PADRAO)
                             raiz.append(nota_fiscal)
                             raiz.append(prot_nfe)
-                            return 2, raiz
+                            return 2, raiz, retorno
                 except IndexError:
                     # Protocolo com algum erro no Envio
                     return 1, retorno, nota_fiscal
